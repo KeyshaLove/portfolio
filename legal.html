@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum & Datenschutz – Andres Krause</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #09090f;
+      --surface: #111118;
+      --border:  #1c1c28;
+      --text:    #e4e4f0;
+      --muted:   #9090aa;
+      --accent:  #4f8ef7;
+      --adim:    rgba(79,142,247,0.10);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(9,9,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 60px;
+      display: flex; align-items: center;
+    }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+    nav a::before { content: '← '; }
+
+    main {
+      max-width: 720px;
+      margin: 80px auto 120px;
+      padding: 0 48px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 56px;
+      color: var(--text);
+    }
+
+    section {
+      margin-bottom: 56px;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 56px 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      main { padding: 0 20px; margin-top: 56px; }
+      footer { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/">Zurück zum Portfolio</a>
+</nav>
+
+<main>
+  <h1>Impressum &amp; Datenschutz</h1>
+
+  <!-- IMPRESSUM -->
+  <section>
+    <h2>Impressum</h2>
+    <p>
+      Andres Krause<br>
+      Holsterhauser Str. 107<br>
+      45147 Essen
+    </p>
+    <p>
+      E-Mail: <a href="mailto:andres.krause@icloud.com">andres.krause@icloud.com</a><br>
+      Telefon: 0177 8049603
+    </p>
+    <p>
+      Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:<br>
+      Andres Krause, Anschrift wie oben
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- DATENSCHUTZ -->
+  <section>
+    <h2>Datenschutz</h2>
+    <p>
+      Diese Website enthält keine Tracking-Skripte, keine Cookies und keine Analyse-Tools.
+      Es werden keine personenbezogenen Daten durch den Seitenbetreiber erhoben oder gespeichert.
+    </p>
+    <p>
+      Die Seite wird über <strong style="color: var(--text);">GitHub Pages</strong> (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) gehostet.
+      Beim Aufruf der Seite werden durch GitHub serverseitig technische Daten wie IP-Adressen in Log-Dateien erfasst.
+      Details dazu: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.
+    </p>
+    <p>
+      Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Betrieb einer funktionsfähigen Website).
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- KI-HINWEIS -->
+  <section>
+    <h2>Hinweis zu KI-generierten Inhalten</h2>
+    <p>
+      Einzelne auf dieser Website gezeigte Arbeiten entstanden ganz oder teilweise mit Unterstützung
+      von KI-Systemen (u. a. DALL·E, Kling, Veo, ElevenLabs, ChatGPT). Dies ist in den jeweiligen
+      Projektbeschreibungen kenntlich gemacht.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 Andres Krause · Essen</span>
+  <a href="/">Portfolio</a>
+</footer>
+
+</body>
+</html>
