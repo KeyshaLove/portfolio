@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andres Krause – AI Creative Production</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #09090f;
+      --surface: #111118;
+      --border:  #1c1c28;
+      --text:    #e4e4f0;
+      --muted:   #9090aa;
+      --accent:  #4f8ef7;
+      --adim:    rgba(79,142,247,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ---- SCROLL REVEAL ---- */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 68px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 48px;
+      background: var(--bg);
+      border-bottom: none;
+    }
+    .nav-name {
+      font-size: 16px; font-weight: 600; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .nav-projects {
+      display: flex; align-items: center; gap: 2px;
+    }
+    .nav-meta {
+      display: flex; align-items: center; gap: 2px; justify-content: flex-end;
+    }
+    .nav-proj {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 15px; color: var(--text); text-decoration: none;
+      padding: 7px 14px; border-radius: 6px;
+      transition: color .15s, background .15s;
+      white-space: nowrap; letter-spacing: .01em; font-weight: 500;
+    }
+    .nav-proj .n { display: none; }
+    .nav-proj:hover { color: var(--text); background: rgba(79,142,247,.1); }
+    .nav-proj:hover .n { opacity: 1; }
+    .nav-sep { width: 1px; height: 14px; background: var(--border); margin: 0 10px; }
+    .nav-link {
+      font-size: 15px; color: var(--muted); text-decoration: none;
+      padding: 7px 14px; border-radius: 6px; letter-spacing: .04em;
+      text-transform: uppercase; font-weight: 500;
+      transition: color .15s, background .15s; white-space: nowrap;
+    }
+    .nav-link:hover { color: var(--text); background: rgba(255,255,255,.06); }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 100px 48px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 55% 55% at 75% 50%, rgba(59,130,246,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      font-size: 13px; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+    h1 {
+      font-size: clamp(42px, 5.5vw, 76px);
+      font-weight: 700; line-height: 1.04; letter-spacing: -.03em;
+      margin-bottom: 28px; max-width: 780px;
+    }
+    h1 em { font-style: normal; color: var(--muted); }
+    .hero-sub {
+      font-size: 17px; color: var(--muted); max-width: 660px;
+      line-height: 1.75; margin-bottom: 40px;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .chip {
+      font-size: 11px; letter-spacing: .06em;
+      padding: 5px 13px; border-radius: 100px;
+      border: 1px solid rgba(255,255,255,.18);
+      color: #c8c8dc; background: rgba(255,255,255,.07);
+    }
+    .chip-hi { color: var(--accent); border-color: rgba(79,142,247,.35); background: var(--adim); }
+    .scroll-hint {
+      position: absolute; bottom: 36px; left: 48px;
+      font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .scroll-hint::after { content: ''; width: 36px; height: 1px; background: var(--muted); opacity: .4; }
+
+    /* ---- SECTION ---- */
+    section { padding: 80px 48px; border-top: none; scroll-margin-top: 62px; }
+    .section-eye {
+      font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 52px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-eye::before { display: none; }
+
+    /* ---- PROJECT LAYOUT ---- */
+    .proj-section {
+      padding: 48px 48px;
+      border-top: 1px solid var(--border);
+      scroll-margin-top: 62px;
+    }
+    .proj-section:first-child { border-top: none; padding-top: 40px; }
+
+    .project {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 32px rgba(0,0,0,.35);
+      min-height: 620px;
+    }
+    .project.flip { direction: rtl; }
+    .project.flip > * { direction: ltr; }
+
+    /* Media pane */
+    .pane {
+      position: relative;
+      background: #000;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    /* Info pane */
+    .info {
+      padding: 80px 56px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .proj-num { font-size: 11px; letter-spacing: .16em; color: var(--muted); margin-bottom: 18px; }
+    .proj-title { font-size: 30px; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 6px; color: var(--text); }
+    .proj-sub { font-size: 13px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+    .proj-desc { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 22px; }
+    .proj-box {
+      background: var(--adim); border: 1px solid rgba(59,130,246,.18);
+      border-radius: 6px; padding: 14px 16px;
+      font-size: 13px; color: var(--text); line-height: 1.6; margin-bottom: 22px;
+    }
+    .proj-box strong { color: var(--accent); }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+    .proj-links { display: flex; flex-wrap: wrap; flex-direction: row; gap: 1rem; }
+    .plink {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.3);
+      text-decoration: none; font-size: 0;
+      transition: background .3s ease, transform .2s;
+      color: var(--text);
+    }
+    .plink span.plink-label { display: none; }
+    .plink svg { width: 16px; height: 16px; flex-shrink: 0; fill: currentColor; }
+    .plink:hover { transform: translateY(-2px); }
+    .plink-dim     { border-color: rgba(255,255,255,.3); color: rgba(255,255,255,.7); }
+    .plink-dim:hover { background: rgba(255,255,255,.08); }
+    .plink-spotify { border-color: #1db954; color: #1db954; }
+    .plink-spotify:hover { background: rgba(29,185,84,.12); }
+    .plink-apple   { border-color: #fc3c44; color: #fc3c44; }
+    .plink-apple:hover { background: rgba(252,60,68,.12); }
+    .plink-deezer  { border-color: #a238ff; color: #a238ff; }
+    .plink-deezer:hover { background: rgba(162,56,255,.12); }
+    .plink-yt      { border-color: #ff0000; color: #ff0000; }
+    .plink-yt:hover { background: rgba(255,0,0,.12); }
+    .plink-ig      { border-color: #e1306c; color: #e1306c; }
+    .plink-ig:hover { background: rgba(225,48,108,.12); }
+    .plink-tidal   { border-color: #00ffff; color: #00ffff; }
+    .plink-tidal:hover { background: rgba(0,255,255,.08); }
+    .plink-amazon  { border-color: #ff9900; color: #ff9900; }
+    .plink-amazon:hover { background: rgba(255,153,0,.12); }
+    .plink-miro    { border-color: #FFD02F; color: #FFD02F; }
+    .plink-miro:hover { background: rgba(255,208,47,.12); }
+
+    /* ---- VIDEO PLAYER ---- */
+    .vid-wrap {
+      position: relative; flex: 1;
+      background: #000;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .vid-wrap video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .vid-wrap.contain video { object-fit: contain; }
+    .vid-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      background: rgba(0,0,0,.15);
+      transition: background .25s;
+    }
+    .vid-overlay:hover { background: rgba(0,0,0,.05); }
+    .play-ring {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: rgba(59,130,246,.15);
+      border: 1.5px solid rgba(59,130,246,.5);
+      display: flex; align-items: center; justify-content: center;
+      transition: all .25s; backdrop-filter: blur(6px);
+    }
+    .play-ring svg { margin-left: 3px; }
+    .vid-overlay:hover .play-ring { background: var(--accent); border-color: var(--accent); transform: scale(1.07); }
+    .play-ring.pause::after { content: '❙❙'; font-size: 17px; color: white; }
+    .play-ring.pause svg { display: none; }
+
+    /* ---- BROWSER WINDOW MOCKUPS ---- */
+    .browser-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      grid-template-rows: auto auto;
+      gap: 20px;
+      padding: 56px;
+      background: #14141e;
+      height: 100%;
+      align-content: center;
+    }
+    .bwin {
+      background: #1a1a28;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 3px 16px rgba(0,0,0,.5);
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    a.bwin:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 8px 28px rgba(0,0,0,.7);
+      cursor: pointer;
+    }
+    a.bwin:hover .bwin-url {
+      color: var(--accent);
+    }
+    /* Website: portrait – spans both rows */
+    .bwin-portrait {
+      grid-row: 1 / 3;
+    }
+    .bwin-portrait .bwin-screen {
+      aspect-ratio: 9 / 14;
+      flex: none;
+    }
+    /* Landscape windows: fixed aspect ratio */
+    .bwin-landscape .bwin-screen {
+      aspect-ratio: 16 / 9;
+      flex: none;
+    }
+    .bwin-landscape.yt .bwin-screen {
+      aspect-ratio: 3 / 2;
+    }
+    .bwin-chrome {
+      height: 24px;
+      background: #2a2a3a;
+      display: flex;
+      align-items: center;
+      padding: 0 9px;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+    .bdot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .bdot-r { background: #ff5f57; }
+    .bdot-y { background: #ffbd2e; }
+    .bdot-g { background: #28c840; }
+    .bwin-url {
+      margin: 0 auto;
+      font-size: 9px;
+      background: #1e1e2e;
+      padding: 2px 9px;
+      border-radius: 3px;
+      color: #888;
+      max-width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: monospace;
+    }
+    .bwin-screen {
+      overflow: hidden;
+      position: relative;
+    }
+    .bwin-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+      display: block;
+    }
+
+    /* ---- INSTAGRAM SCREENSHOTS (PAW MOTION) ---- */
+    .pm-media {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f0f0f4;
+    }
+    .pm-video-wrap {
+      flex: 1;
+      position: relative;
+      background: #000;
+    }
+    .pm-video-wrap video {
+      width: 100%; height: 100%; object-fit: contain; display: block;
+    }
+    .pm-ig-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+    }
+    .pm-ig-row img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ---- PISTAZIA SLIDER ---- */
+    .slider { flex: 1; position: relative; overflow: hidden; background: #000; }
+    .slider-track {
+      display: flex; height: 100%; width: 500%;
+      transition: transform .45s cubic-bezier(.4,0,.2,1);
+    }
+    .slider-track img {
+      width: 20%; height: 100%; object-fit: cover; display: block; flex-shrink: 0;
+    }
+    .slider-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.15);
+      color: white; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s; backdrop-filter: blur(6px); z-index: 4;
+    }
+    .slider-btn:hover { background: rgba(79,142,247,.6); border-color: var(--accent); }
+    .slider-prev { left: 14px; }
+    .slider-next { right: 14px; }
+    .slider-dots {
+      position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 7px; z-index: 4;
+    }
+    .sdot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,.5); cursor: pointer; transition: background .2s;
+    }
+    .sdot.on { background: var(--accent); }
+
+    /* ---- SPOTIFY ---- */
+    .spotify-wrap { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 28px; }
+
+    /* ---- ABOUT ---- */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .about-grid > * { margin-top: 0 !important; padding-top: 0 !important; }
+    .about-grid > * > *:first-child { margin-top: 0 !important; }
+    .about-text h2 { font-size: 24px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 12px; line-height: 1.15; }
+    .about-text p { font-size: 13px; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
+    .facts { display: flex; flex-direction: column; gap: 8px; }
+    .fact { background: var(--adim); border: 1px solid rgba(59,130,246,.18); border-radius: 6px; padding: 10px 14px; font-size: 13px; color: var(--text); line-height: 1.6; }
+    .fact-label { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); display: inline; margin-right: 6px; }
+    .fact-val { display: inline; color: var(--text); }
+    .fact-chip { display: none; }
+
+    /* ---- CONTACT ---- */
+    .contact-block h2 { font-size: 32px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 16px; line-height: 1.15; }
+    .contact-block p { font-size: 16px; color: var(--muted); margin-bottom: 28px; line-height: 1.8; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 12px; }
+    .clink {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500;
+      color: var(--text); text-decoration: none;
+      padding: 11px 18px; border: 1px solid var(--border);
+      border-radius: 6px; background: var(--surface);
+      transition: all .2s;
+    }
+    .clink:hover { border-color: var(--accent); color: var(--accent); background: var(--adim); }
+
+    /* ---- FOOTER ---- */
+    footer {
+      border-top: 1px solid var(--border); padding: 24px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      nav { padding: 0 20px; }
+      .hero, section { padding-left: 20px; padding-right: 20px; }
+      .project, .project.flip { grid-template-columns: 1fr; direction: ltr; }
+      .pane { min-height: 280px; }
+      .browser-grid { min-height: 280px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      footer { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">Andres Krause</span>
+  <div class="nav-projects">
+    <a href="#keysha" class="nav-proj"><span class="n">01</span> Keysha Love</a>
+    <a href="#pawmotion" class="nav-proj"><span class="n">02</span> Paw Motion</a>
+    <a href="#lufthansa" class="nav-proj"><span class="n">03</span> Lufthansa</a>
+    <a href="#pistazia" class="nav-proj"><span class="n">04</span> Pistacia Royale</a>
+  </div>
+  <div class="nav-meta">
+    <span class="nav-sep"></span>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="eyebrow">AI Creative Production · Portfolio 2025/26</p>
+  <h1>Media designer<br><em>20 years craft</em><br>AI-accelerated</h1>
+  <p class="hero-sub">Senior-level background in image retouching, print, and e-commerce.<br>Hands-on AI production: visual identities, video, audio, online marketing and web.</p>
+  <div class="chips">
+    <span class="chip chip-hi">Claude</span>
+    <span class="chip chip-hi">ChatGPT</span>
+    <span class="chip chip-hi">Gemini</span>
+    <span class="chip chip-hi">Freepik AI</span>
+    <span class="chip chip-hi">DALL·E</span>
+    <span class="chip chip-hi">Kling</span>
+    <span class="chip chip-hi">Veo</span>
+    <span class="chip chip-hi">Suno</span>
+    <span class="chip chip-hi">ElevenLabs</span>
+    <div style="width:100%; height:0;"></div>
+    <span class="chip">Adobe Creative Cloud</span>
+    <span class="chip">Photoshop</span>
+    <span class="chip">Lightroom</span>
+    <span class="chip">InDesign</span>
+    <span class="chip">Premiere</span>
+    <span class="chip">CapCut</span>
+    <span class="chip">Audio Tools</span>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="proj-section" id="keysha">
+
+  <div class="project reveal">
+    <!-- 4 browser window mockups -->
+    <div class="pane" style="background:#14141e; padding:0;">
+      <div class="browser-grid">
+
+        <!-- Left: keyshalove.com portrait, spans both rows -->
+        <a href="https://keyshalove.com" target="_blank" class="bwin bwin-portrait">
+          <div class="bwin-chrome">
+            <span class="bdot bdot-r"></span>
+            <span class="bdot bdot-y"></span>
+            <span class="bdot bdot-g"></span>
+            <div class="bwin-url">keyshalove.com</div>
+          </div>
+          <div class="bwin-screen">
+            <img src="img/keysha_website_preview.jpg" alt="keyshalove.com" style="object-position: top center;">
+          </div>
+        </a>
+
+        <!-- Right top: Instagram -->
+        <a href="https://www.instagram.com/keysha.love.music/" target="_blank" class="bwin bwin-landscape">
+          <div class="bwin-chrome">
+            <span class="bdot bdot-r"></span>
+            <span class="bdot bdot-y"></span>
+            <span class="bdot bdot-g"></span>
+            <div class="bwin-url">instagram.com/keysha.love.music</div>
+          </div>
+          <div class="bwin-screen">
+            <img src="img/kl_ig_screen.png" alt="Keysha Love on Instagram">
+          </div>
+        </a>
+
+        <!-- Right bottom: YouTube -->
+        <a href="https://www.youtube.com/watch?v=vor3GUWClcc" target="_blank" class="bwin bwin-landscape yt">
+          <div class="bwin-chrome">
+            <span class="bdot bdot-r"></span>
+            <span class="bdot bdot-y"></span>
+            <span class="bdot bdot-g"></span>
+            <div class="bwin-url">youtube.com/@Keysha_Love</div>
+          </div>
+          <div class="bwin-screen">
+            <img src="img/kl_yt3_screen.png" alt="Keysha Love on YouTube">
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="info">
+      <h2 class="proj-title">Keysha Love</h2>
+      <p class="proj-sub">Full AI Character Production</p>
+      <p class="proj-desc">Keysha Love is a fully AI-produced virtual soul artist with a debut album on all major streaming platforms, a consistent visual identity across multiple image series, social media campaigns, an integrated voice agent, and a live website including reusable workflows and <a href="https://miro.com/app/board/uXjVGr1C8b4=/" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">documented visual templates</a>. Conceived, produced and published by one person.</p>
+      <div class="proj-tags">
+        <span class="chip">Character Identity</span>
+        <span class="chip">Image Production</span>
+        <span class="chip">Music (Suno)</span>
+        <span class="chip">Video Production</span>
+        <span class="chip">Voice Agent</span>
+        <span class="chip">Web</span>
+      </div>
+      <div class="spotify-wrap">
+        <iframe src="https://open.spotify.com/embed/album/7oWeUsxtLX8VxAkr5evSw9?utm_source=generator&theme=0"
+          width="100%" height="152" frameBorder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy" style="display:block; border-radius:8px;"></iframe>
+      </div>
+      <div class="proj-links">
+        <a href="https://open.spotify.com/intl-de/album/7oWeUsxtLX8VxAkr5evSw9" target="_blank" class="plink plink-spotify" title="Spotify">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        </a>
+        <a href="https://music.apple.com/us/album/touching-soul/6774491204" target="_blank" class="plink plink-apple" title="Apple Music">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm3 8.4l-5.4 1.35v5.566c-.27-.084-.558-.132-.857-.132-.993 0-1.793.742-1.793 1.658s.8 1.658 1.793 1.658 1.793-.742 1.793-1.658V11.1l3.6-.9v3.816c-.27-.084-.558-.132-.857-.132-.993 0-1.793.742-1.793 1.658s.8 1.658 1.793 1.658S15 17.358 15 16.442V8.4z"/></svg>
+        </a>
+        <a href="https://music.youtube.com/playlist?list=OLAK5uy_n7e4ts6U0_rfQgbiTZgJZMQu-w9yDg8p4" target="_blank" class="plink plink-yt" title="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zm-13.233 5.83l5.75 3.02-5.75 3.02V12.25z"/></svg>
+        </a>
+        <a href="https://www.deezer.com/en/album/988444541" target="_blank" class="plink plink-deezer" title="Deezer">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.503 15.504h2.991v1.502H3.503zm4.99 0h2.99v1.502h-2.99zm4.99 0h2.99v1.502h-2.99zm4.99 0H21.46v1.502h-2.988zM8.493 12.51h2.99v1.503h-2.99zm4.99 0h2.99v1.503h-2.99zm4.99 0H21.46v1.503h-2.988zM13.483 9.517h2.99V11.02h-2.99zm4.99 0H21.46V11.02h-2.988zM18.472 6.5H21.46v1.502h-2.988z"/></svg>
+        </a>
+        <a href="https://listen.tidal.com/album/527278591" target="_blank" class="plink plink-tidal" title="Tidal">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996l4.004 4.004 4.004-4.004 4.004 4.004 4.004-4.004L20.02 11.999l-4.004 4.005 4.004 4.004L24 16.004l-4.004-4.005 4.004-4.003L19.996 3.992l-4.004 4.004zm-4.004 8.008l-4.004 4.004L8.008 20.008l4.004-4.004z"/></svg>
+        </a>
+        <a href="https://music.amazon.com/albums/B0H2KNYNX2" target="_blank" class="plink plink-amazon" title="Amazon Music">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.699-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.073-1.048-.872-1.236-1.276-1.814-2.107-1.733 1.769-2.959 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.095v-.41c0-.753.06-1.642-.384-2.294-.385-.579-1.124-.82-1.775-.82-1.205 0-2.277.618-2.54 1.897-.054.285-.261.567-.549.582l-3.061-.333c-.259-.056-.547-.266-.472-.66C5.978 1.565 9.037 0 11.809 0c1.415 0 3.264.376 4.379 1.448 1.416 1.32 1.281 3.082 1.281 4.999v4.528c0 1.361.564 1.959 1.096 2.693.186.262.226.576-.013.771l-1.408 1.356zm3.853 1.932c-2.519 1.822-6.172 2.797-9.318 2.797-4.409 0-8.38-1.631-11.383-4.34-.236-.213-.025-.504.259-.338 3.242 1.888 7.253 3.022 11.394 3.022 2.795 0 5.869-.579 8.698-1.779.427-.181.785.281.35.638zm.99-1.125c-.322-.412-2.126-.195-2.938-.098-.246.029-.284-.186-.062-.341 1.438-1.011 3.798-.72 4.073-.381.275.342-.072 2.709-1.424 3.838-.207.175-.405.082-.313-.146.305-.761.985-2.462.664-2.872z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/keysha.love.music/" target="_blank" class="plink plink-ig" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://keyshalove.com" target="_blank" class="plink plink-dim" title="keyshalove.com">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="proj-section" id="pawmotion">
+
+  <div class="project flip reveal">
+    <div class="info">
+      <h2 class="proj-title">Paw Motion</h2>
+      <p class="proj-sub">Concept Project · Image &amp; Video Production · Social Media Campaign</p>
+      <p class="proj-desc">Team project for a fictional animal prosthetics startup. A market and competitor sentiment analysis shaped the visual direction. Within the team I was primarily responsible for the visual production: AI-generated imagery, a 16:9 motion test exploring prosthetics in animation, and a 9:16 Instagram Reel planned and edited from brief to published post.</p>
+      <div class="proj-box">
+        <strong>Process:</strong> Market and competitor analysis, AI image generation (Freepik, DALL·E), scene planning, video edit. Published as @pawmotion_de on Instagram.
+      </div>
+      <div class="proj-tags">
+        <span class="chip">Content Strategy</span>
+        <span class="chip">Keyword Research</span>
+        <span class="chip">Image Production</span>
+        <span class="chip">Video Production</span>
+      </div>
+    </div>
+
+    <div class="pane" style="background:#14141e; padding:0;">
+      <div class="browser-grid" style="grid-template-columns:1fr; grid-template-rows:auto auto;">
+
+        <!-- Top: Shot1 landscape video -->
+        <div class="bwin bwin-landscape" style="cursor:default;">
+          <div class="bwin-chrome">
+            <span class="bdot bdot-r"></span>
+            <span class="bdot bdot-y"></span>
+            <span class="bdot bdot-g"></span>
+            <div class="bwin-url">Shot1.mp4 · @pawmotion_de</div>
+          </div>
+          <div class="bwin-screen" style="position:relative;">
+            <video id="pm-v" src="img/pm_shot1.mp4" poster="img/Ansicht2_1.jpg" preload="none"
+              controls style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+          </div>
+        </div>
+
+        <!-- Bottom row: equal width windows -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; height:240px;">
+
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/pawmotion_de/" target="_blank" class="bwin"
+             style="height:100%; min-width:0;">
+            <div class="bwin-chrome">
+              <span class="bdot bdot-r"></span>
+              <span class="bdot bdot-y"></span>
+              <span class="bdot bdot-g"></span>
+              <div class="bwin-url">instagram.com/pawmotion_de</div>
+            </div>
+            <div class="bwin-screen" style="flex:1; aspect-ratio:unset; height:100%; overflow:hidden;">
+              <img src="img/pm_ig_screen.png" alt="Paw Motion on Instagram"
+                style="width:100%;height:100%;object-fit:contain;object-position:top center;background:#1a1a28;display:block;">
+            </div>
+          </a>
+
+          <!-- Instagram Reel: grid pow -->
+          <div onclick="openVidModal('img/pawmotion.mp4')"
+               style="height:100%; position:relative; min-width:0;
+                      border-radius:6px; overflow:hidden; cursor:pointer;
+                      box-shadow:0 3px 16px rgba(0,0,0,.5);">
+            <img src="img/pm_grid.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <!-- Play button overlay -->
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+                        background:rgba(0,0,0,.2); transition:background .2s;"
+                 onmouseenter="this.style.background='rgba(0,0,0,.45)'"
+                 onmouseleave="this.style.background='rgba(0,0,0,.2)'">
+              <div class="play-ring">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="proj-section" id="lufthansa">
+
+  <div class="project reveal">
+    <div class="pane" style="background:#14141e; padding:0;">
+      <div class="browser-grid" style="grid-template-columns:1fr;">
+
+        <!-- Video with Intro.png as poster -->
+        <div class="bwin bwin-landscape" style="cursor:default;">
+          <div class="bwin-chrome">
+            <span class="bdot bdot-r"></span>
+            <span class="bdot bdot-y"></span>
+            <span class="bdot bdot-g"></span>
+            <div class="bwin-url">Lufthansa Crew · Cabin Experience</div>
+          </div>
+          <div class="bwin-screen" style="position:relative;">
+            <video id="lh-v" src="img/lufthansa.mp4" poster="img/lh_thumb.png" preload="none"
+              style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+            <div class="vid-overlay" onclick="toggleVid('lh-v', this)">
+              <div class="play-ring" id="lh-ring">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="info">
+      <h2 class="proj-title">Lufthansa Crew<br>Cabin Experience</h2>
+      <p class="proj-sub">Game Concept · Image &amp; Video Production</p>
+      <p class="proj-desc">Team project: a gamified onboarding concept for Lufthansa cabin crew, presented as a first-person simulation. My role covered image and video production: AI-generated NPC and game characters, a 16:9 video produced with Veo 3.1, dialogue synced with ElevenLabs, music, ambient sound and atmos sourced from free libraries and assembled in Premiere Pro.</p>
+      <div class="proj-tags">
+        <span class="chip">NPC · Character Design</span>
+        <span class="chip">Image Production</span>
+        <span class="chip">Video Production</span>
+        <span class="chip">Audio Production</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="proj-section" id="pistazia">
+
+  <div class="project flip reveal">
+    <div class="info">
+      <h2 class="proj-title">Pistacia Royale</h2>
+      <p class="proj-sub">Brand Identity · Image Production · Quick Concept</p>
+      <p class="proj-desc">Pistacia Royale is a fictional luxury pistachio brand, developed independently from concept to final imagery. Starting from scratch, a complete visual identity was built in a single session: product photography, lifestyle imagery, and character scenes, all AI-generated with a consistent color language and a clear brand positioning from the first image.</p>
+      <div class="proj-box">
+        <strong>What this shows:</strong> Rapid brand concept work. From nothing to a coherent visual identity: product shot, lifestyle imagery, character scene in under one session.
+      </div>
+      <div class="proj-tags">
+        <span class="chip">Brand Concept</span>
+        <span class="chip">AI Product Photography</span>
+        <span class="chip">Campaign Visuals</span>
+        <span class="chip">Rapid Prototyping</span>
+      </div>
+    </div>
+
+    <div class="pane" style="padding:0; overflow:hidden;">
+      <div class="slider" id="pist-slider">
+        <div class="slider-track" id="pist-track" style="width:500%;">
+          <img src="img/pistazia_dark.png"       alt="Packshot dark"   style="width:20%; height:100%; object-fit:cover;">
+          <img src="img/pistazia_light.png"      alt="Packshot light"  style="width:20%; height:100%; object-fit:cover;">
+          <img src="img/pistazia_kleo.png"       alt="Kleopatra"       style="width:20%; height:100%; object-fit:cover;">
+          <img src="img/pistazia_scheich.png"    alt="Sultan"          style="width:20%; height:100%; object-fit:cover;">
+          <img src="img/pistazia_scheich_mb.png" alt="Sultan Milchbart" style="width:20%; height:100%; object-fit:cover;">
+        </div>
+        <button class="slider-btn slider-prev" onclick="slide(-1)">&#8592;</button>
+        <button class="slider-btn slider-next" onclick="slide(1)">&#8594;</button>
+        <div class="slider-dots" id="pist-dots"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT + CONTACT -->
+<section id="about" style="border-top:none; padding-top:120px;">
+  <div class="about-grid reveal">
+    <!-- Left: text -->
+    <div>
+      <h2 style="font-size:32px; font-weight:700; letter-spacing:-.02em; margin-bottom:16px; line-height:1.15;"><span style="color:var(--muted)">Senior craft</span> meets AI production</h2>
+      <p style="font-size:16px; color:var(--muted); line-height:1.8;">20+ years of experience in image retouching and media production across print, advertising, and e-commerce. The qualification as AI Media and Content Creator at WBS Training in 2025/26 opened new territory: online marketing, campaign analysis, and the thinking behind content, not just the making of it. Systematic, documented, built to scale.</p>
+    </div>
+    <!-- Right: contact -->
+    <div id="contact" class="contact-block" style="padding-top:0; align-self:start; margin-top:0;">
+      <h2>Let's talk</h2>
+      <p>Looking for a position in digital imaging, post-production, and AI content creation.<br>Happy to discuss project work as well.<br>This portfolio was designed and iterated using AI tools, including Claude.</p>
+      <div class="contact-links">
+        <a href="mailto:andres.krause@icloud.com" class="clink">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          Email
+        </a>
+        <a href="https://linkedin.com/in/andres-krause-111724411" target="_blank" class="clink">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Andres Krause · Essen</span>
+  <span>AI Creative Production</span>
+</footer>
+
+<script>
+  // SCROLL REVEAL
+  const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }), { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // VIDEO TOGGLE (with sound)
+  // VIDEO LIGHTBOX
+  function openVidModal(src) {
+    const m = document.getElementById('vid-modal');
+    const v = document.getElementById('vid-modal-v');
+    v.src = src;
+    v.play();
+    m.style.display = 'flex';
+  }
+  function closeVidModal() {
+    const v = document.getElementById('vid-modal-v');
+    v.pause(); v.src = '';
+    document.getElementById('vid-modal').style.display = 'none';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVidModal(); });
+
+  function toggleVid(id, overlay) {
+    const v = document.getElementById(id);
+    const ring = overlay.querySelector('.play-ring');
+    if (v.paused) { v.play(); ring.classList.add('pause'); }
+    else { v.pause(); ring.classList.remove('pause'); }
+  }
+
+  // PISTAZIA SLIDER
+  let pistIdx = 0;
+  const pistTotal = 5;
+  const track = document.getElementById('pist-track');
+  const dotsEl = document.getElementById('pist-dots');
+
+  for (let i = 0; i < pistTotal; i++) {
+    const d = document.createElement('div');
+    d.className = 'sdot' + (i === 0 ? ' on' : '');
+    d.onclick = () => goSlide(i);
+    dotsEl.appendChild(d);
+  }
+
+  function goSlide(i) {
+    pistIdx = i;
+    track.style.transform = `translateX(-${(100 / pistTotal) * i}%)`;
+    document.querySelectorAll('.sdot').forEach((d, j) => d.classList.toggle('on', j === i));
+  }
+
+  function slide(dir) {
+    goSlide((pistIdx + dir + pistTotal) % pistTotal);
+  }
+
+  // autoplay removed
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+<!-- VIDEO LIGHTBOX MODAL -->
+<div id="vid-modal" onclick="closeVidModal()"
+  style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:9999;
+         align-items:center; justify-content:center; cursor:pointer;">
+  <video id="vid-modal-v" controls
+    style="max-width:92vw; max-height:88vh; display:block; border-radius:6px;
+           box-shadow:0 8px 48px rgba(0,0,0,.8);"
+    onclick="event.stopPropagation()"></video>
+</div>
+
+</body>
+</html>
