@@ -1,0 +1,24 @@
+# Andres Krause – Mediengestalter & KI-Creative
+
+> Portfolio von Andres Krause aus Essen: Mediengestalter mit über 20 Jahren Erfahrung in Bildbearbeitung, Retusche und technischer Reinzeichnung für Print, Werbung und E-Commerce, heute spezialisiert auf KI-gestützte Creative-Produktion (Bild, Video, Audio, Web, Online-Marketing). Weiterbildung zum KI Medien- und Content Gestalter bei WBS Training 2025/26. Sucht eine Festanstellung in der Bildbearbeitung, Postproduktion oder KI-Content-Creation, gerne auch in Kombination.
+
+## Profil
+
+- Über 20 Jahre Berufserfahrung: High-End-Retusche (Food, Packaging, People, Produkte), Composing, Farbmanagement, Reinzeichnung, Druckvorstufe
+- KI-Produktion: Bildgenerierung (DALL·E, Freepik AI, Kling), Video (Veo), Musik (Suno), Voice (ElevenLabs), Workflows mit Claude, ChatGPT, Gemini
+- Klassische Tools: Adobe Creative Cloud (Photoshop, Lightroom, InDesign, Premiere), CapCut
+- Standort: Essen, Deutschland
+- Kontakt: andres.krause@icloud.com
+- LinkedIn: https://linkedin.com/in/andres-krause-111724411
+
+## Projekte
+
+- [Keysha Love](https://andreskrause.de/#keysha): Vollständig KI-produzierte virtuelle Soul-Künstlerin. Debütalbum „Touching Soul" auf Spotify, Apple Music, YouTube Music, Deezer, Tidal und Amazon Music. Visuelle Identität, Social-Media-Kampagnen, Voice Agent, Website (keyshalove.com). Konzipiert, produziert und veröffentlicht von einer Person.
+- [Paw Motion](https://andreskrause.de/#pawmotion): Konzeptprojekt für ein fiktives Tierprothesen-Startup. Markt-/Wettbewerbsanalyse, KI-Bildproduktion, 16:9-Motion-Test, 9:16-Instagram-Reel (@pawmotion_de).
+- [Lufthansa Crew Cabin Experience](https://andreskrause.de/#lufthansa): Game-Konzept „The Cabin Experience" zur Nachwuchsgewinnung, First-Person-Simulation des Kabinencrew-Alltags. KI-generierte Spieler- und NPC-Charaktere, Video mit Veo 3.1, Dialoge mit ElevenLabs, Audio-Montage in Premiere Pro.
+- [Pistacia Royale](https://andreskrause.de/#pistazia): Fiktive Luxus-Pistazienmarke. Komplette visuelle Identität in einer Session: Packshots, Lifestyle-Bilder, Charakterszenen, KI-generiert mit konsistenter Farbsprache.
+
+## Seiten
+
+- [Portfolio](https://andreskrause.de/): Startseite mit allen Projekten
+- [Impressum & Datenschutz](https://andreskrause.de/legal.html)

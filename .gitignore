@@ -1,0 +1,5 @@
+.DS_Store
+img/*.mp4
+img/*.png
+img/*.jpg
+!img/og.jpg

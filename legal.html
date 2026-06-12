@@ -5,22 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Impressum & Datenschutz – Andres Krause</title>
   <style>
+    @font-face {
+      font-family: 'Space Grotesk';
+      font-style: normal;
+      font-weight: 300 700;
+      font-display: swap;
+      src: url('fonts/space-grotesk-latin-wght-normal.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('fonts/inter-latin-wght-normal.woff2') format('woff2');
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    @view-transition { navigation: auto; }
+
     :root {
-      --bg:      #09090f;
+      --bg:      #0a0a10;
       --surface: #111118;
-      --border:  #1c1c28;
-      --text:    #e4e4f0;
-      --muted:   #9090aa;
-      --accent:  #4f8ef7;
-      --adim:    rgba(79,142,247,0.10);
+      --border:  #1e1e2a;
+      --text:    #e8e8f2;
+      --muted:   #9494ae;
+      --accent:  #5b95f8;
+      --adim:    rgba(91,149,248,0.10);
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 16px;
       line-height: 1.7;
       overflow-x: hidden;
@@ -52,8 +69,9 @@
     }
 
     h1 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       font-size: 28px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 56px;
       color: var(--text);
@@ -140,8 +158,9 @@
   <section>
     <h2>Datenschutz</h2>
     <p>
-      Diese Website enthält keine Tracking-Skripte, keine Cookies und keine Analyse-Tools.
+      Diese Website setzt keine eigenen Tracking-Skripte, Cookies oder Analyse-Tools ein.
       Es werden keine personenbezogenen Daten durch den Seitenbetreiber erhoben oder gespeichert.
+      Hinweise zu eingebetteten Drittinhalten (Spotify) siehe unten.
     </p>
     <p>
       Die Seite wird über <strong style="color: var(--text);">GitHub Pages</strong> (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) gehostet.
@@ -150,6 +169,15 @@
     </p>
     <p>
       Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Betrieb einer funktionsfähigen Website).
+    </p>
+    <p>
+      <strong style="color: var(--text);">Schriftarten</strong> werden lokal auf diesem Server gehostet. Es findet keine Verbindung zu Google Fonts oder anderen externen Font-Diensten statt.
+    </p>
+    <p>
+      <strong style="color: var(--text);">Spotify-Player:</strong> Auf der Portfolio-Seite ist ein Player von Spotify (Spotify AB, Regeringsgatan 19, 111 53 Stockholm, Schweden) eingebettet.
+      Beim Aufruf der Seite werden dadurch Daten (z.&nbsp;B. IP-Adresse) an Spotify übertragen und ggf. Cookies gesetzt.
+      Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Präsentation der eigenen Arbeiten).
+      Details: <a href="https://www.spotify.com/de/legal/privacy-policy/" target="_blank" rel="noopener">Spotify Datenschutzerklärung</a>.
     </p>
   </section>
 
