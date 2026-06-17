@@ -757,11 +757,11 @@
           <div class="bwin-screen" style="position:relative;">
             <div class="carousel" style="position:absolute; inset:0;">
               <div class="carousel-track" id="pist-track" tabindex="0" aria-label="Bildergalerie Pistacia Royale">
-                <img src="img/opt/pistazia_dark.webp"       alt="Pistacia Royale – Lifestyle-Szene dunkel" loading="lazy" decoding="async" onclick="openImgModal(this.src,this.alt)" style="cursor:zoom-in;">
-                <img src="img/opt/pistazia_light.webp"      alt="Pistacia Royale – Lifestyle-Szene hell" loading="lazy" decoding="async" onclick="openImgModal(this.src,this.alt)" style="cursor:zoom-in;">
-                <img src="img/opt/pistazia_kleo.webp"       alt="Pistacia Royale – Kleopatra-Szene" loading="lazy" decoding="async" onclick="openImgModal(this.src,this.alt)" style="cursor:zoom-in;">
-                <img src="img/opt/pistazia_scheich.webp"    alt="Pistacia Royale – Sultan-Szene Studio" loading="lazy" decoding="async" onclick="openImgModal(this.src,this.alt)" style="cursor:zoom-in;">
-                <img src="img/opt/pistazia_scheich_mb.webp" alt="Pistacia Royale – Sultan-Szene" loading="lazy" decoding="async" onclick="openImgModal(this.src,this.alt)" style="cursor:zoom-in;">
+                <img src="img/opt/pistazia_dark.webp"       alt="Pistacia Royale – Lifestyle-Szene dunkel" loading="lazy" decoding="async" onclick="openImgModal(this)" style="cursor:zoom-in;">
+                <img src="img/opt/pistazia_light.webp"      alt="Pistacia Royale – Lifestyle-Szene hell" loading="lazy" decoding="async" onclick="openImgModal(this)" style="cursor:zoom-in;">
+                <img src="img/opt/pistazia_kleo.webp"       alt="Pistacia Royale – Kleopatra-Szene" loading="lazy" decoding="async" onclick="openImgModal(this)" style="cursor:zoom-in;">
+                <img src="img/opt/pistazia_scheich.webp"    alt="Pistacia Royale – Sultan-Szene Studio" loading="lazy" decoding="async" onclick="openImgModal(this)" style="cursor:zoom-in;">
+                <img src="img/opt/pistazia_scheich_mb.webp" alt="Pistacia Royale – Sultan-Szene" loading="lazy" decoding="async" onclick="openImgModal(this)" style="cursor:zoom-in;">
               </div>
               <button class="car-btn car-prev" onclick="slide(-1)" aria-label="Vorheriges Bild">←</button>
               <button class="car-btn car-next" onclick="slide(1)" aria-label="Nächstes Bild">→</button>
@@ -892,6 +892,8 @@
 <!-- IMAGE LIGHTBOX -->
 <div id="img-modal" onclick="closeImgModal()" role="dialog" aria-label="Bildansicht">
   <img id="img-modal-i" src="" alt="" onclick="event.stopPropagation()">
+  <button class="car-btn car-prev" onclick="event.stopPropagation(); slideImgModal(-1)" aria-label="Vorheriges Bild">←</button>
+  <button class="car-btn car-next" onclick="event.stopPropagation(); slideImgModal(1)" aria-label="Nächstes Bild">→</button>
 </div>
 
 <script>
@@ -913,13 +915,32 @@
     v.pause(); v.removeAttribute('src'); v.load();
     document.getElementById('vid-modal').style.display = 'none';
   }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeVidModal(); closeImgModal(); } });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeVidModal(); closeImgModal(); }
+    if (document.getElementById('img-modal').style.display === 'flex') {
+      if (e.key === 'ArrowLeft') slideImgModal(-1);
+      if (e.key === 'ArrowRight') slideImgModal(1);
+    }
+  });
 
   // IMAGE LIGHTBOX
-  function openImgModal(src, alt) {
-    const i = document.getElementById('img-modal-i');
-    i.src = src; i.alt = alt || '';
+  let imgModalImages = [];
+  let imgModalIndex = 0;
+  function openImgModal(el) {
+    imgModalImages = Array.from(el.parentElement.children);
+    imgModalIndex = imgModalImages.indexOf(el);
+    showImgModal();
     document.getElementById('img-modal').style.display = 'flex';
+  }
+  function showImgModal() {
+    const el = imgModalImages[imgModalIndex];
+    const i = document.getElementById('img-modal-i');
+    i.src = el.src; i.alt = el.alt || '';
+  }
+  function slideImgModal(dir) {
+    if (!imgModalImages.length) return;
+    imgModalIndex = (imgModalIndex + dir + imgModalImages.length) % imgModalImages.length;
+    showImgModal();
   }
   function closeImgModal() {
     document.getElementById('img-modal').style.display = 'none';
