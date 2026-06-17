@@ -776,39 +776,48 @@
       </div>
     </div>
 
-    <div class="pane" style="background:#10101a; padding:0; display:flex; flex-direction:column;">
-      <div style="padding:24px 24px 0; display:flex; justify-content:center;">
-        <div class="bwin bwin-portrait" style="cursor:default; max-width:230px; width:100%;">
+    <div class="pane" style="background:#10101a; padding:0;">
+      <div class="browser-grid" style="grid-template-columns:1fr; grid-template-rows:auto auto;">
+        <div class="bwin bwin-landscape" style="cursor:default;">
           <div class="bwin-chrome">
             <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
-            <div class="bwin-url">Pistacia Royale · 360°</div>
+            <div class="bwin-url">Pistacia Royale · Lifestyle</div>
           </div>
-          <div class="bwin-screen">
-            <button onclick="openVidModal('img/opt/pistazia_orbit.mp4')" aria-label="360°-Animation abspielen"
-                 style="position:relative; width:100%; height:100%; border:none; padding:0; margin:0; cursor:pointer; background:#000; display:block;">
-              <img src="img/opt/pistazia_orbit_poster.webp" alt="Pistacia Royale – 360°-Animation" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
-              <span class="vid-overlay" style="position:absolute;">
-                <span class="play-ring">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-                </span>
-              </span>
-            </button>
+          <div class="bwin-screen" style="position:relative;">
+            <div class="carousel" style="position:absolute; inset:0;">
+              <div class="carousel-track" id="pist-track" tabindex="0" aria-label="Bildergalerie Pistacia Royale">
+                <img src="img/opt/pistazia_dark.webp"       alt="Pistacia Royale – Lifestyle-Szene dunkel" loading="lazy" decoding="async">
+                <img src="img/opt/pistazia_light.webp"      alt="Pistacia Royale – Lifestyle-Szene hell" loading="lazy" decoding="async">
+                <img src="img/opt/pistazia_kleo.webp"       alt="Pistacia Royale – Kleopatra-Szene" loading="lazy" decoding="async">
+                <img src="img/opt/pistazia_scheich_mb.webp" alt="Pistacia Royale – Sultan-Szene" loading="lazy" decoding="async">
+              </div>
+              <button class="car-btn car-prev" onclick="slide(-1)" aria-label="Vorheriges Bild">←</button>
+              <button class="car-btn car-next" onclick="slide(1)" aria-label="Nächstes Bild">→</button>
+              <div class="car-dots" id="pist-dots" role="tablist" aria-label="Galerie-Navigation"></div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="carousel" style="flex:1; min-height:240px;">
-        <div class="carousel-track" id="pist-track" tabindex="0" aria-label="Bildergalerie Pistacia Royale">
-          <img src="img/opt/pistazia_front.webp"    alt="Pistacia Royale – Packshot Front" loading="lazy" decoding="async">
-          <img src="img/opt/pistazia_back.webp"     alt="Pistacia Royale – Packshot Rückseite" loading="lazy" decoding="async">
-          <img src="img/opt/pistazia_left.webp"     alt="Pistacia Royale – Packshot links" loading="lazy" decoding="async">
-          <img src="img/opt/pistazia_right.webp"    alt="Pistacia Royale – Packshot rechts" loading="lazy" decoding="async">
-          <img src="img/opt/pistazia_kleo.webp"     alt="Pistacia Royale – Kleopatra-Szene" loading="lazy" decoding="async">
-          <img src="img/opt/pistazia_scheich.webp"  alt="Pistacia Royale – Sultan-Szene" loading="lazy" decoding="async">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; min-height:160px;">
+          <div class="bwin bwin-portrait" style="cursor:default; max-width:160px; width:100%; justify-self:start; grid-row:auto;">
+            <div class="bwin-chrome">
+              <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
+              <div class="bwin-url">360°</div>
+            </div>
+            <div class="bwin-screen">
+              <button onclick="openVidModal('img/opt/pistazia_orbit.mp4')" aria-label="360°-Animation abspielen"
+                   style="position:relative; width:100%; height:100%; border:none; padding:0; margin:0; cursor:pointer; background:#000; display:block;">
+                <img src="img/opt/pistazia_orbit_poster.webp" alt="Pistacia Royale – 360°-Animation" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
+                <span class="vid-overlay" style="position:absolute;">
+                  <span class="play-ring">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div></div>
         </div>
-        <button class="car-btn car-prev" onclick="slide(-1)" aria-label="Vorheriges Bild">←</button>
-        <button class="car-btn car-next" onclick="slide(1)" aria-label="Nächstes Bild">→</button>
-        <div class="car-dots" id="pist-dots" role="tablist" aria-label="Galerie-Navigation"></div>
       </div>
     </div>
   </article>
