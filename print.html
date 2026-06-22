@@ -399,47 +399,6 @@
   </style>
 </head>
 <body>
-<div id="pw-gate" style="position:fixed;inset:0;z-index:99999;background:#0a0a10;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;padding:24px;text-align:center;font-family:'Inter',sans-serif;">
-  <p style="color:#fff;font-size:15px;letter-spacing:.02em;margin:0 0 4px;">Geschützter Bereich</p>
-  <form id="pw-form" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
-    <input id="pw-input" type="password" placeholder="Passwort" autocomplete="off" style="background:#15151c;border:1px solid #2a2a35;border-radius:8px;color:#fff;padding:11px 14px;font-size:14px;min-width:220px;outline:none;">
-    <button type="submit" style="background:#fff;color:#0a0a10;border:none;border-radius:8px;padding:11px 20px;font-size:14px;font-weight:600;cursor:pointer;">Enter</button>
-  </form>
-  <p id="pw-error" style="color:#ff6b6b;font-size:13px;margin:0;visibility:hidden;">Falsches Passwort.</p>
-</div>
-<script>
-(function(){
-  var HASH = "72231043bc1807e6f740b235eb7511ecb33255a6a375435631196de8a9750d4b";
-  var KEY = "print_unlocked";
-  var gate = document.getElementById("pw-gate");
-
-  function sha256(text){
-    var enc = new TextEncoder().encode(text);
-    return crypto.subtle.digest("SHA-256", enc).then(function(buf){
-      return Array.prototype.map.call(new Uint8Array(buf), function(b){
-        return b.toString(16).padStart(2, "0");
-      }).join("");
-    });
-  }
-
-  if (sessionStorage.getItem(KEY) === "1") {
-    gate.remove();
-  }
-
-  document.getElementById("pw-form").addEventListener("submit", function(e){
-    e.preventDefault();
-    var val = document.getElementById("pw-input").value;
-    sha256(val).then(function(hash){
-      if (hash === HASH) {
-        sessionStorage.setItem(KEY, "1");
-        gate.remove();
-      } else {
-        document.getElementById("pw-error").style.visibility = "visible";
-      }
-    });
-  });
-})();
-</script>
 
 
 <a href="#projekte" class="skip-link">Direkt zu den Projekten</a>
