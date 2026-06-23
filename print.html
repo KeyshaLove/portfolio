@@ -283,7 +283,7 @@
     /* ============ BOOK MOCKUP – flat ============ */
     .book-stage {
       flex: 1; display: flex; align-items: flex-end; justify-content: center;
-      padding: 40px 28px 32px;
+      padding: 40px 28px 32px; position: relative;
     }
     .book-3d {
       position: relative; cursor: pointer; overflow: hidden;
@@ -341,7 +341,7 @@
 
     /* ============ BOOK READER ============ */
     .book-reader {
-      display: none; position: absolute; inset: 0; z-index: 20;
+      display: none; position: absolute; inset: 0; z-index: 10;
       background: rgba(8,8,16,.97); flex-direction: column;
     }
     .book-reader.active { display: flex; }
@@ -484,6 +484,15 @@
           <div class="book-front" style="background-image:url('img/print/hadid_jacket.webp')"></div>
           <div class="book-edge"></div>
         </div>
+        <div class="book-reader">
+          <button class="reader-close" aria-label="Schließen">✕</button>
+          <div class="reader-main">
+            <button class="reader-btn reader-prev" aria-label="Zurück">←</button>
+            <img src="" alt="">
+            <button class="reader-btn reader-next" aria-label="Weiter">→</button>
+          </div>
+          <div class="reader-footer"></div>
+        </div>
       </div>
       <div class="strip-wrap">
         <button class="strip-btn strip-prev" data-target="strip-hadid" aria-label="Zurück">←</button>
@@ -499,15 +508,6 @@
           <img class="ithumb" src="img/print/hadid_3.webp" alt="Zaha Hadid – Doppelseite 560–561" loading="lazy">
         </div>
         <button class="strip-btn strip-next" data-target="strip-hadid" aria-label="Weiter">→</button>
-      </div>
-      <div class="book-reader">
-        <button class="reader-close" aria-label="Schließen">✕</button>
-        <div class="reader-main">
-          <button class="reader-btn reader-prev" aria-label="Zurück">←</button>
-          <img src="" alt="">
-          <button class="reader-btn reader-next" aria-label="Weiter">→</button>
-        </div>
-        <div class="reader-footer"></div>
       </div>
     </div>
     <div class="info">
@@ -544,6 +544,15 @@
           <div class="book-front" style="background-image:url('img/print/pkg_cover.webp')"></div>
           <div class="book-edge"></div>
         </div>
+        <div class="book-reader">
+          <button class="reader-close" aria-label="Schließen">✕</button>
+          <div class="reader-main">
+            <button class="reader-btn reader-prev" aria-label="Zurück">←</button>
+            <img src="" alt="">
+            <button class="reader-btn reader-next" aria-label="Weiter">→</button>
+          </div>
+          <div class="reader-footer"></div>
+        </div>
       </div>
       <div class="strip-wrap">
         <button class="strip-btn strip-prev" data-target="strip-pkg" aria-label="Zurück">←</button>
@@ -562,15 +571,6 @@
           <img class="ithumb" src="img/print/pkg_stand_13.webp" alt="Package Design Book 6 – Seite 413" loading="lazy">
         </div>
         <button class="strip-btn strip-next" data-target="strip-pkg" aria-label="Weiter">→</button>
-      </div>
-      <div class="book-reader">
-        <button class="reader-close" aria-label="Schließen">✕</button>
-        <div class="reader-main">
-          <button class="reader-btn reader-prev" aria-label="Zurück">←</button>
-          <img src="" alt="">
-          <button class="reader-btn reader-next" aria-label="Weiter">→</button>
-        </div>
-        <div class="reader-footer"></div>
       </div>
     </div>
     <div class="info">
@@ -657,6 +657,15 @@
           <div class="book-front" style="background-image:url('img/print/zuerich_cover.webp')"></div>
           <div class="book-edge"></div>
         </div>
+        <div class="book-reader">
+          <button class="reader-close" aria-label="Schließen">✕</button>
+          <div class="reader-main">
+            <button class="reader-btn reader-prev" aria-label="Zurück">←</button>
+            <img src="" alt="">
+            <button class="reader-btn reader-next" aria-label="Weiter">→</button>
+          </div>
+          <div class="reader-footer"></div>
+        </div>
       </div>
       <div class="strip-wrap">
         <button class="strip-btn strip-prev" data-target="strip-zuerich" aria-label="Zurück">←</button>
@@ -670,15 +679,6 @@
           <img class="ithumb" src="img/print/zuerich_7.webp" alt="Zürich in den 1970er Jahren – Seite 316–317" loading="lazy">
         </div>
         <button class="strip-btn strip-next" data-target="strip-zuerich" aria-label="Weiter">→</button>
-      </div>
-      <div class="book-reader">
-        <button class="reader-close" aria-label="Schließen">✕</button>
-        <div class="reader-main">
-          <button class="reader-btn reader-prev" aria-label="Zurück">←</button>
-          <img src="" alt="">
-          <button class="reader-btn reader-next" aria-label="Weiter">→</button>
-        </div>
-        <div class="reader-footer"></div>
       </div>
     </div>
     <div class="info">
@@ -715,6 +715,15 @@
           <div class="book-front" style="background-image:url('img/print/chandoha_1.webp')"></div>
           <div class="book-edge"></div>
         </div>
+        <div class="book-reader">
+          <button class="reader-close" aria-label="Schließen">✕</button>
+          <div class="reader-main">
+            <button class="reader-btn reader-prev" aria-label="Zurück">←</button>
+            <img src="" alt="">
+            <button class="reader-btn reader-next" aria-label="Weiter">→</button>
+          </div>
+          <div class="reader-footer"></div>
+        </div>
       </div>
       <div class="strip-wrap">
         <button class="strip-btn strip-prev" data-target="strip-chandoha" aria-label="Zurück">←</button>
@@ -729,15 +738,6 @@
           <img class="ithumb" src="img/print/chandoha_sp2.webp" alt="Walter Chandoha – Doppelseite" loading="lazy">
         </div>
         <button class="strip-btn strip-next" data-target="strip-chandoha" aria-label="Weiter">→</button>
-      </div>
-      <div class="book-reader">
-        <button class="reader-close" aria-label="Schließen">✕</button>
-        <div class="reader-main">
-          <button class="reader-btn reader-prev" aria-label="Zurück">←</button>
-          <img src="" alt="">
-          <button class="reader-btn reader-next" aria-label="Weiter">→</button>
-        </div>
-        <div class="reader-footer"></div>
       </div>
     </div>
     <div class="info">
