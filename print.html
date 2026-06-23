@@ -98,6 +98,12 @@
       white-space: nowrap; transition: all .2s;
     }
     .nav-back:hover { color: var(--text); border-color: var(--accent); }
+    .nav-cta {
+      font-size: 13px; font-weight: 600; color: #fff; text-decoration: none;
+      padding: 8px 18px; border-radius: 100px; background: var(--grad);
+      white-space: nowrap; transition: filter .2s, transform .2s;
+    }
+    .nav-cta:hover { filter: brightness(1.12); transform: translateY(-1px); }
     .burger {
       display: none; background: none; border: 1px solid var(--border);
       border-radius: 8px; width: 40px; height: 40px; cursor: pointer;
@@ -418,6 +424,7 @@
   </div>
   <div style="display:flex;align-items:center;gap:10px;">
     <a href="index.html" class="nav-back">← KI-Portfolio</a>
+    <a href="index.html#contact" class="nav-cta">Kontakt</a>
     <button class="burger" popovertarget="mobile-menu" aria-label="Menü öffnen">☰</button>
   </div>
 </nav>
@@ -430,6 +437,7 @@
   <a href="#packagedesign">Package Design</a>
   <a href="#nufarm">Nufarm</a>
   <a href="index.html">← KI-Portfolio</a>
+  <a href="index.html#contact">Kontakt</a>
 </div>
 
 <header class="hero" id="top">
@@ -437,12 +445,13 @@
   <div class="blob blob-1" aria-hidden="true"></div>
   <div class="blob blob-2" aria-hidden="true"></div>
 
-  <p class="eyebrow">Print · Prepress · Arbeitsproben</p>
+  <p class="eyebrow">Image & Print Production</p>
   <h1>Mediengestalter<br><span class="dim">20 Jahre Handwerk</span><br><em>Pixelgenau</em></h1>
   <p class="hero-sub"><strong>Bildbearbeitung, Composing, Lookentwicklung und Prepress</strong> für Agenturen und Verlage. Langjährige Erfahrung in Werbung, Magazinen, Buch- und Kunstpublikationen sowie E-Commerce. Schwerpunkt <strong>People, Product, Food, Packaging und Editorial.</strong></p>
 
   <div class="hero-ctas">
     <a href="#hadid" class="btn btn-pri">Projekte ansehen ↓</a>
+    <a href="index.html" class="btn btn-sec">← KI-Portfolio</a>
   </div>
 
   <div class="marquee" aria-label="Tools und Software">
@@ -823,7 +832,7 @@
 
 <footer>
   <span>© 2026 Andres Krause · Essen</span>
-  <span>Print &amp; Retusche &nbsp;·&nbsp; <a href="/legal.html">Impressum &amp; Datenschutz</a> &nbsp;·&nbsp; <a href="index.html">KI-Portfolio</a></span>
+  <span>Print &amp; Retusche &nbsp;·&nbsp; <a href="/legal.html">Impressum &amp; Datenschutz</a> &nbsp;·&nbsp; <a href="index.html">KI-Portfolio</a> &nbsp;·&nbsp; <a href="index.html#contact">Kontakt</a></span>
 </footer>
 
 <div id="img-modal" onclick="closeImgModal()" role="dialog" aria-label="Bildansicht">
