@@ -738,25 +738,22 @@
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns:1fr 180px; gap:16px; min-height:160px; align-items:stretch;">
-          <div class="bwin bwin-landscape" style="cursor:default; width:100%; height:100%;">
+        <div style="display:grid; grid-template-columns:1fr 180px; gap:16px; align-items:start;">
+          <div class="bwin bwin-landscape" style="cursor:default;">
             <div class="bwin-chrome">
               <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
               <div class="bwin-url">Logo-Reveal</div>
             </div>
-            <div class="bwin-screen" style="flex:1; aspect-ratio:auto; position:relative;">
-              <button onclick="openVidModal('img/opt/pistazia_logo_reveal3.mp4')" aria-label="Logo-Reveal abspielen"
-                   style="position:absolute; inset:0; border:none; padding:0; margin:0; cursor:pointer; background:#000; display:block; width:100%; height:100%;">
-                <img src="img/opt/pistazia_logo_poster3.webp" alt="Pistacia Royale – Logo-Reveal" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
-                <span class="vid-overlay" style="position:absolute;">
-                  <span class="play-ring">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-                  </span>
+            <div class="bwin-screen" style="position:relative;">
+              <img src="img/opt/pistazia_logo_poster3.webp" alt="Pistacia Royale – Logo-Reveal" loading="lazy" decoding="async">
+              <div class="vid-overlay" onclick="openVidModal('img/opt/pistazia_logo_reveal3.mp4')" style="cursor:pointer;" role="button" aria-label="Logo-Reveal abspielen">
+                <span class="play-ring">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
                 </span>
-              </button>
+              </div>
             </div>
           </div>
-          <div class="bwin bwin-portrait" style="cursor:default; max-width:180px; width:100%; justify-self:end; grid-row:auto;">
+          <div class="bwin" style="cursor:default;">
             <div class="bwin-chrome">
               <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
               <div class="bwin-url">Crème Packshot</div>
