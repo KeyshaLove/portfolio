@@ -328,8 +328,8 @@
 
     .project {
       display: grid; grid-template-columns: 1fr 1fr;
-      grid-template-areas: "pane header" "pane info";
-      grid-template-rows: auto 1fr;
+      grid-template-areas: "pane ." "pane header" "pane info" "pane .";
+      grid-template-rows: 1fr auto auto 1fr;
       border: 1px solid var(--border);
       background: linear-gradient(160deg, var(--surface) 0%, var(--surface2) 100%);
       overflow: hidden;
@@ -339,7 +339,6 @@
       transition: border-color .3s;
     }
     .project:hover { border-color: rgba(91,149,248,.25); }
-    .project.flip { grid-template-areas: "header pane" "info pane"; }
 
     .pane {
       grid-area: pane;
@@ -347,8 +346,8 @@
       overflow: hidden; display: flex; flex-direction: column; justify-content: center;
     }
 
-    .proj-header { grid-area: header; align-self: end; padding: clamp(36px, 5vw, 72px) clamp(24px, 4vw, 56px) 0; }
-    .info { grid-area: info; padding: 0 clamp(24px, 4vw, 56px) clamp(36px, 5vw, 72px); display: flex; flex-direction: column; justify-content: center; }
+    .proj-header { grid-area: header; padding: 0 clamp(24px, 4vw, 56px); }
+    .info { grid-area: info; padding: 0 clamp(24px, 4vw, 56px); }
     .proj-title { font-size: clamp(26px, 2.6vw, 34px); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 8px; }
     .proj-sub { font-size: 12.5px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; font-weight: 600; }
     .proj-desc { font-size: 14.5px; color: var(--muted); line-height: 1.8; margin-bottom: 22px; }
