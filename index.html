@@ -103,7 +103,7 @@
       --radius:  14px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
     body {
       background: var(--bg);
@@ -563,7 +563,8 @@
       .browser-grid { grid-template-columns: 1fr !important; grid-template-rows: auto; }
       .bwin-portrait { grid-row: auto; }
       .bwin-portrait .bwin-screen { aspect-ratio: 9 / 12; }
-      .about-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; padding: 32px var(--pad) 56px; }
+      .about-text { padding-top: 0; }
       footer { flex-direction: column; text-align: center; }
       .carousel { aspect-ratio: 16 / 10; }
       .scroll-hint { display: none; }
