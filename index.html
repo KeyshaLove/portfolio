@@ -328,6 +328,8 @@
 
     .project {
       display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-areas: "pane header" "pane info";
+      grid-template-rows: auto 1fr;
       border: 1px solid var(--border);
       background: linear-gradient(160deg, var(--surface) 0%, var(--surface2) 100%);
       overflow: hidden;
@@ -337,15 +339,16 @@
       transition: border-color .3s;
     }
     .project:hover { border-color: rgba(91,149,248,.25); }
-    .project.flip { direction: rtl; }
-    .project.flip > * { direction: ltr; }
+    .project.flip { grid-template-areas: "header pane" "info pane"; }
 
     .pane {
+      grid-area: pane;
       position: relative; background: #0c0c14; min-height: 580px;
       overflow: hidden; display: flex; flex-direction: column; justify-content: center;
     }
 
-    .info { padding: clamp(36px, 5vw, 72px) clamp(24px, 4vw, 56px); display: flex; flex-direction: column; justify-content: center; }
+    .proj-header { grid-area: header; align-self: end; padding: clamp(36px, 5vw, 72px) clamp(24px, 4vw, 56px) 0; }
+    .info { grid-area: info; padding: 0 clamp(24px, 4vw, 56px) clamp(36px, 5vw, 72px); display: flex; flex-direction: column; justify-content: center; }
     .proj-title { font-size: clamp(26px, 2.6vw, 34px); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 8px; }
     .proj-sub { font-size: 12.5px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; font-weight: 600; }
     .proj-desc { font-size: 14.5px; color: var(--muted); line-height: 1.8; margin-bottom: 22px; }
@@ -543,8 +546,17 @@
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .burger { display: block; }
-      .project, .project.flip { grid-template-columns: 1fr; direction: ltr; min-height: 0; }
+      .hero { padding: 100px var(--pad) 60px; min-height: 0; }
+      .proj-section { padding: 28px var(--pad); }
+      .project, .project.flip {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: "header" "pane" "info";
+        min-height: 0;
+      }
       .pane { min-height: 0; }
+      .proj-header { align-self: auto; padding: 28px clamp(20px, 5vw, 32px) 0; }
+      .info { padding: 0 clamp(20px, 5vw, 32px) 28px; }
       .browser-grid { grid-template-columns: 1fr !important; grid-template-rows: auto; }
       .bwin-portrait { grid-row: auto; }
       .bwin-portrait .bwin-screen { aspect-ratio: 9 / 12; }
@@ -617,6 +629,10 @@
 <!-- KEYSHA LOVE -->
 <div class="proj-section" id="keysha">
   <article class="project reveal">
+    <div class="proj-header">
+      <h3 class="proj-title">Keysha Love</h3>
+      <p class="proj-sub">Komplette KI-Charakter-Produktion</p>
+    </div>
     <div class="pane" style="background:#10101a; padding:0;">
       <div class="browser-grid">
         <a href="https://keyshalove.com" target="_blank" rel="noopener" class="bwin bwin-portrait">
@@ -650,8 +666,6 @@
     </div>
 
     <div class="info">
-      <h3 class="proj-title">Keysha Love</h3>
-      <p class="proj-sub">Komplette KI-Charakter-Produktion</p>
       <p class="proj-desc">Keysha Love ist eine vollständig KI-produzierte virtuelle Soul-Künstlerin: Debütalbum auf allen großen Streaming-Plattformen, konsistente visuelle Identität über mehrere Bildserien, Social-Media-Kampagnen, integrierter Voice Agent und eine Live-Website samt wiederverwendbaren <a href="https://miro.com/app/board/uXjVGr1C8b4=/" target="_blank" rel="noopener">Prompt-Systemen und Templates</a>. Konzipiert, produziert und veröffentlicht von einer Person.</p>
       <div class="proj-tags">
         <span class="chip">Character Identity</span>
@@ -700,20 +714,10 @@
 <!-- 02 PISTACIA ROYALE -->
 <div class="proj-section" id="pistazia">
   <article class="project flip reveal">
-    <div class="info">
+    <div class="proj-header">
       <h3 class="proj-title">Pistacia Royale</h3>
       <p class="proj-sub">Brand Identity · Bildproduktion · Videoproduktion</p>
-      <p class="proj-desc">Pistacia Royale ist eine fiktive Luxus-Pistazienmarke, eigenständig entwickelt vom Konzept bis zur fertigen Kampagne. Schrittweise aufgebaut: vom Logo über Packshot und Mood-/Charakterszenen bis zur Produktanimation, alles KI-generiert mit konsistenter Farbsprache und klarer Markenpositionierung ab dem ersten Bild.</p>
-      <div class="proj-box">
-        <strong>Was das zeigt:</strong> Markenentwicklung in klaren Stufen: Logo, Packshot, Mood/Charakterszene und Produktanimation als kohärente visuelle Identität, KI-gestützt vom ersten Bild an.
-      </div>
-      <div class="proj-tags">
-        <span class="chip">Markenkonzept</span>
-        <span class="chip">KI-Produktfotografie</span>
-        <span class="chip">Kampagnen-Visuals</span>
-      </div>
     </div>
-
     <div class="pane" style="background:#10101a; padding:0;">
       <div class="browser-grid" style="grid-template-columns:1fr; grid-template-rows:auto auto;">
         <div class="bwin bwin-landscape" style="cursor:default;">
@@ -738,7 +742,7 @@
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns:1fr 180px; gap:16px; align-items:start;">
+        <div style="display:grid; grid-template-columns:2fr 1fr; gap:16px; align-items:start;">
           <div class="bwin bwin-landscape" style="cursor:default;">
             <div class="bwin-chrome">
               <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
@@ -773,25 +777,27 @@
         </div>
       </div>
     </div>
+
+    <div class="info">
+      <p class="proj-desc">Pistacia Royale ist eine fiktive Luxus-Pistazienmarke, eigenständig entwickelt vom Konzept bis zur fertigen Kampagne. Schrittweise aufgebaut: vom Logo über Packshot und Mood-/Charakterszenen bis zur Produktanimation, alles KI-generiert mit konsistenter Farbsprache und klarer Markenpositionierung ab dem ersten Bild.</p>
+      <div class="proj-box">
+        <strong>Was das zeigt:</strong> Markenentwicklung in klaren Stufen: Logo, Packshot, Mood/Charakterszene und Produktanimation als kohärente visuelle Identität, KI-gestützt vom ersten Bild an.
+      </div>
+      <div class="proj-tags">
+        <span class="chip">Markenkonzept</span>
+        <span class="chip">KI-Produktfotografie</span>
+        <span class="chip">Kampagnen-Visuals</span>
+      </div>
+    </div>
   </article>
 </div>
 
 <!-- 03 PAW MOTION -->
 <div class="proj-section" id="pawmotion">
   <article class="project flip reveal">
-    <div class="info">
+    <div class="proj-header">
       <h3 class="proj-title">Paw Motion</h3>
       <p class="proj-sub">Konzeptprojekt · Bild & Video · Social-Media-Kampagne</p>
-      <p class="proj-desc">Teamprojekt für ein fiktives Tierprothesen-Startup. Eine Markt- und Wettbewerbs-Sentiment-Analyse hat die visuelle Richtung vorgegeben. Im Team war ich primär für die visuelle Produktion verantwortlich: KI-generierte Bildwelten, ein 16:9-Motion-Test zu Prothesen in Animation und ein 9:16-Instagram-Reel, geplant und geschnitten von Briefing bis Veröffentlichung.</p>
-      <div class="proj-box">
-        <strong>Prozess:</strong> Markt-, Wettbewerbs- und Zielgruppenanalyse (DACH), strukturierte Promptstrategien (CRISPE), KI-Bildgenerierung (Freepik, DALL·E), Szenenplanung, Videoschnitt in Premiere Pro. Veröffentlicht als @pawmotion_de auf Instagram.
-      </div>
-      <div class="proj-tags">
-        <span class="chip">Content-Strategie</span>
-        <span class="chip">Keyword-Recherche</span>
-        <span class="chip">Bildproduktion</span>
-        <span class="chip">Videoproduktion</span>
-      </div>
     </div>
 
     <div class="pane" style="background:#10101a; padding:0;">
@@ -829,12 +835,29 @@
         </div>
       </div>
     </div>
+
+    <div class="info">
+      <p class="proj-desc">Teamprojekt für ein fiktives Tierprothesen-Startup. Eine Markt- und Wettbewerbs-Sentiment-Analyse hat die visuelle Richtung vorgegeben. Im Team war ich primär für die visuelle Produktion verantwortlich: KI-generierte Bildwelten, ein 16:9-Motion-Test zu Prothesen in Animation und ein 9:16-Instagram-Reel, geplant und geschnitten von Briefing bis Veröffentlichung.</p>
+      <div class="proj-box">
+        <strong>Prozess:</strong> Markt-, Wettbewerbs- und Zielgruppenanalyse (DACH), strukturierte Promptstrategien (CRISPE), KI-Bildgenerierung (Freepik, DALL·E), Szenenplanung, Videoschnitt in Premiere Pro. Veröffentlicht als @pawmotion_de auf Instagram.
+      </div>
+      <div class="proj-tags">
+        <span class="chip">Content-Strategie</span>
+        <span class="chip">Keyword-Recherche</span>
+        <span class="chip">Bildproduktion</span>
+        <span class="chip">Videoproduktion</span>
+      </div>
+    </div>
   </article>
 </div>
 
 <!-- 04 LUFTHANSA -->
 <div class="proj-section" id="lufthansa">
   <article class="project reveal">
+    <div class="proj-header">
+      <h3 class="proj-title">Lufthansa Crew<br>Cabin Experience</h3>
+      <p class="proj-sub">Game-Konzept · Bild & Video</p>
+    </div>
     <div class="pane" style="background:#10101a; padding:0;">
       <div class="browser-grid" style="grid-template-columns:1fr;">
         <div class="bwin bwin-landscape" style="cursor:default;">
@@ -855,8 +878,6 @@
     </div>
 
     <div class="info">
-      <h3 class="proj-title">Lufthansa Crew<br>Cabin Experience</h3>
-      <p class="proj-sub">Game-Konzept · Bild & Video</p>
       <p class="proj-desc">Teamprojekt „The Cabin Experience": eine First-Person-Simulation, die den Arbeitsalltag der Kabinencrew spielbar macht. Konzipiert zur Nachwuchsgewinnung, mit Messemodus als Teaser und Lernmodus als Trainingstool. Meine Rolle: Bild- und Videoproduktion. KI-generierte Spieler- und NPC-Charaktere im Corporate Design, ein 16:9-Video produziert mit Veo 3.1, Dialoge synchronisiert mit ElevenLabs, Musik, Ambient und Atmo aus freien Bibliotheken, montiert in Premiere Pro.</p>
       <div class="proj-tags">
         <span class="chip">NPC · Character Design</span>
