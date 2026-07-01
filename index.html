@@ -325,6 +325,7 @@
     /* ============ SECTIONS / PROJECTS ============ */
     section, .proj-section { scroll-margin-top: 76px; }
     .proj-section { padding: 44px var(--pad); }
+    main#projekte { padding-top: 50px; }
 
     .project {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -544,8 +545,10 @@
     /* ============ RESPONSIVE ============ */
     @media (max-width: 900px) {
       .nav-links { display: none; }
+      .area-tag { display: none; }
       .burger { display: block; }
-      .hero { padding: 100px var(--pad) 60px; min-height: 0; }
+      main#projekte { padding-top: 0; }
+      .hero { padding: 100px var(--pad) 40px; min-height: 0; }
       .proj-section { padding: 28px var(--pad); }
       .project, .project.flip {
         grid-template-columns: 1fr;
@@ -556,6 +559,7 @@
       .pane { min-height: 0; }
       .proj-header { align-self: auto; padding: 28px clamp(20px, 5vw, 32px) 0; }
       .info { padding: 0 clamp(20px, 5vw, 32px) 28px; }
+      .pm-thumbs { min-height: 0 !important; }
       .browser-grid { grid-template-columns: 1fr !important; grid-template-rows: auto; }
       .bwin-portrait { grid-row: auto; }
       .bwin-portrait .bwin-screen { aspect-ratio: 9 / 12; }
@@ -623,7 +627,7 @@
   <p class="scroll-hint">Scrollen</p>
 </header>
 
-<main id="projekte" style="padding-top:50px;">
+<main id="projekte">
 
 <!-- KEYSHA LOVE -->
 <div class="proj-section" id="keysha">
@@ -811,7 +815,7 @@
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; min-height:220px; align-items:start;">
+        <div class="pm-thumbs" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; min-height:220px; align-items:start;">
           <a href="https://www.instagram.com/pawmotion_de/" target="_blank" rel="noopener" class="bwin" style="min-width:0;">
             <div class="bwin-chrome">
               <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
