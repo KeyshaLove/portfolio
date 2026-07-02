@@ -480,11 +480,10 @@
       background: rgba(0,0,0,.7); border: 1px solid rgba(255,255,255,.3);
       padding: 8px 18px; border-radius: 100px; font-size: 12.5px; color: var(--text);
     }
-    .kurve-sub { display: grid; grid-template-columns: 1fr 1.15fr; gap: 18px; padding: 0 clamp(24px, 3.5vw, 52px) clamp(24px, 3.5vw, 52px); background: #10101a; }
-    .kurve-banners { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; min-width: 0; }
+    .kurve-sub { display: flex; flex-direction: column; gap: 18px; padding: 0 clamp(24px, 3.5vw, 52px) clamp(24px, 3.5vw, 52px); background: #10101a; }
+    .kurve-brow { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; align-items: start; }
     .kurve-b-wrap { border: 1px solid var(--border); border-radius: 8px; background: #000; width: 100%; }
-    .kurve-b-wrap.b-sq { max-width: 302px; }
-    @media (max-width: 860px) { .kurve-sub { grid-template-columns: 1fr; } }
+    @media (max-width: 860px) { .kurve-brow { grid-template-columns: 1fr 1fr; } }
 
     /* ============ VIDEO ============ */
     .vid-overlay {
@@ -924,24 +923,30 @@
     </div>
     <div class="pane" style="background:#10101a; padding:0;">
       <div class="browser-grid" style="grid-template-columns:1fr;">
-        <a class="bwin bwin-landscape" href="kurve/" target="_blank" rel="noopener">
+        <a class="bwin bwin-landscape" href="kurve/index.html" target="_blank" rel="noopener">
           <div class="bwin-chrome">
             <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
             <div class="bwin-url">andreskrause.de/kurve</div>
           </div>
           <div class="bwin-screen kurve-fit" data-w="1440" data-h="900">
-            <iframe src="kurve/" width="1440" height="900" loading="lazy" title="KURVE Landingpage – Live-Vorschau" tabindex="-1"></iframe>
+            <iframe src="kurve/index.html" width="1440" height="900" loading="lazy" title="KURVE Landingpage – Live-Vorschau" tabindex="-1"></iframe>
             <div class="kurve-live"><span>Landingpage live ansehen ↗</span></div>
           </div>
         </a>
       </div>
       <div class="kurve-sub">
-        <div class="kurve-banners">
-          <div class="kurve-b-wrap kurve-fit" data-w="728" data-h="90">
-            <iframe src="kurve/banner/banner_728x90.html" width="728" height="90" loading="lazy" title="KURVE HTML5-Banner 728×90" tabindex="-1"></iframe>
+        <div class="kurve-b-wrap kurve-fit" data-w="728" data-h="90">
+          <iframe src="kurve/banner/banner_728x90.html" width="728" height="90" loading="lazy" title="KURVE HTML5-Banner 728×90" tabindex="-1"></iframe>
+        </div>
+        <div class="kurve-brow">
+          <div class="kurve-b-wrap kurve-fit" data-w="300" data-h="250">
+            <iframe src="kurve/banner/banner_300x250.html" width="300" height="250" loading="lazy" title="KURVE HTML5-Banner 300×250" tabindex="-1"></iframe>
           </div>
-          <div class="kurve-b-wrap b-sq kurve-fit" data-w="300" data-h="250">
+          <div class="kurve-b-wrap kurve-fit" data-w="300" data-h="250">
             <iframe src="kurve/banner/banner_300x250_quoten.html" width="300" height="250" loading="lazy" title="KURVE Quoten-Banner 300×250" tabindex="-1"></iframe>
+          </div>
+          <div class="kurve-b-wrap kurve-fit" data-w="300" data-h="600">
+            <iframe src="kurve/banner/banner_300x600.html" width="300" height="600" loading="lazy" title="KURVE Halfpage-Banner 300×600" tabindex="-1"></iframe>
           </div>
         </div>
         <div class="bwin bwin-landscape" style="cursor:default;">
@@ -949,8 +954,8 @@
             <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
             <div class="bwin-url">KURVE · Spot 10s</div>
           </div>
-          <div class="bwin-screen" style="position:relative;">
-            <video id="kurve-v" src="img/opt/kurve_spot.mp4" poster="img/opt/kurve_thumb.webp" preload="none" playsinline loop></video>
+          <div class="bwin-screen" style="position:relative; aspect-ratio:16/9; flex:none;">
+            <video id="kurve-v" src="img/opt/kurve_spot.mp4" poster="img/opt/kurve_thumb.webp" preload="none" playsinline loop style="width:100%;height:100%;object-fit:contain;"></video>
             <div class="vid-overlay" onclick="toggleVid('kurve-v', this)">
               <div class="play-ring">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
@@ -973,8 +978,8 @@
         <span class="chip">Landingpage</span>
       </div>
       <div class="proj-links">
-        <a class="chip" href="kurve/" target="_blank" rel="noopener">Landingpage ↗</a>
-        <a class="chip" href="kurve/banner/" target="_blank" rel="noopener">Banner-Set ↗</a>
+        <a class="chip" href="kurve/index.html" target="_blank" rel="noopener">Landingpage ↗</a>
+        <a class="chip" href="kurve/banner/index.html" target="_blank" rel="noopener">Banner-Set ↗</a>
       </div>
     </div>
   </article>
