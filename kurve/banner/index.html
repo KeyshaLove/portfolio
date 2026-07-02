@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>KURVE | Animierte HTML5-Banner (Preview)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,800&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Poppins',sans-serif;background:#15201a;color:#fff;padding:50px 6vw}
+h1{font-weight:800;font-style:italic;text-transform:uppercase}
+h1 span{color:#FEC438}
+p{opacity:.7;margin:8px 0 40px}
+.wrap{display:flex;gap:60px;flex-wrap:wrap;align-items:flex-start}
+.row{margin-bottom:44px}
+.row h2{font-size:15px;font-weight:400;opacity:.6;margin-bottom:12px}
+iframe{border:1px solid rgba(255,255,255,.15);border-radius:4px;background:#000}
+button{margin-left:12px;background:none;border:1px solid #FEC438;color:#FEC438;border-radius:999px;padding:4px 14px;font-family:inherit;font-size:12px;cursor:pointer}
+</style>
+</head>
+<body>
+<h1>KURVE <span>Banner-Set</span></h1>
+<p>Animierte HTML5-Banner (CSS-Keyframes, keine Skripte). Alle Banner laufen im 12-Sekunden-Loop endlos weiter.</p>
+
+<div class="row">
+  <h2>Leaderboard 728×90</h2>
+  <iframe src="banner_728x90.html" width="728" height="90" scrolling="no"></iframe>
+</div>
+
+<div class="wrap">
+  <div class="row">
+    <h2>Medium Rectangle 300×250</h2>
+    <iframe src="banner_300x250.html" width="300" height="250" scrolling="no"></iframe>
+  </div>
+
+  <div class="row">
+    <h2>Quoten-Banner 300×250, wechselnde Spiele</h2>
+    <iframe src="banner_300x250_quoten.html" width="300" height="250" scrolling="no"></iframe>
+  </div>
+
+  <div class="row">
+    <h2>Halfpage 300×600</h2>
+    <iframe src="banner_300x600.html" width="300" height="600" scrolling="no"></iframe>
+  </div>
+</div>
+
+</body>
+</html>

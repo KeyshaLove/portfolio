@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KURVE | Dein Spiel. Deine Quote. | Fiktive Marke (Portfolio-Projekt)</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#0A0F0C; --green:#1E5C2F; --accent:#FEC438; --white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--dark);color:var(--white);line-height:1.6}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* Nav */
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 6vw;position:sticky;top:0;background:rgba(10,15,12,.85);backdrop-filter:blur(8px);z-index:10}
+.wordmark{font-weight:800;font-style:italic;font-size:28px;letter-spacing:-.5px;color:var(--accent);position:relative;display:inline-block}
+.wordmark svg{position:absolute;left:2%;bottom:-7px;width:100%}
+nav ul{display:flex;gap:28px;list-style:none;font-size:14px;opacity:.85}
+nav .cta-s{background:var(--accent);color:var(--dark);font-weight:700;padding:8px 18px;border-radius:999px;font-size:14px}
+
+/* Hero */
+.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,12,.15) 30%,rgba(10,15,12,.92) 100%)}
+.hero-inner{position:relative;z-index:2;padding:0 6vw 70px;max-width:900px}
+.hero h1{font-size:clamp(42px,7vw,92px);font-weight:800;font-style:italic;line-height:1.02;text-transform:uppercase}
+.hero h1 em{color:var(--accent);font-style:italic}
+.hero p.sub{margin:18px 0 30px;font-size:clamp(16px,2vw,21px);opacity:.9}
+.cta{display:inline-block;background:var(--accent);color:var(--dark);font-weight:700;font-size:18px;padding:16px 42px;border-radius:999px;transition:transform .15s ease}
+.cta:hover{transform:scale(1.04)}
+
+/* Quoten-Band */
+.odds{overflow:hidden;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:22px 0;position:relative}
+.odds:hover .track{animation-play-state:paused}
+.track{display:flex;gap:0;width:max-content;animation:ticker 28s linear infinite}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.odd{display:flex;align-items:center;gap:18px;padding:0 44px;border-right:1px solid rgba(255,255,255,.08);white-space:nowrap}
+.odd .match{font-size:13px;opacity:.65}
+.odd .teams{font-weight:700;font-size:17px}
+.odd .quote{display:inline-block;background:rgba(254,196,56,.14);color:var(--accent);font-weight:700;padding:6px 16px;border-radius:8px;animation:pulse 2.6s infinite}
+.odd .live{background:var(--accent);color:var(--dark);font-size:11px;font-weight:700;padding:2px 10px;border-radius:999px;text-transform:uppercase}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(254,196,56,.3)}50%{box-shadow:0 0 0 10px rgba(254,196,56,0)}}
+
+/* Bildwelt */
+section.world{padding:90px 6vw}
+section.world h2{font-size:clamp(28px,4vw,48px);font-weight:800;font-style:italic;text-transform:uppercase;margin-bottom:8px}
+section.world p.lead{opacity:.75;max-width:620px;margin-bottom:44px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.card{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/10}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card::before{content:"";position:absolute;inset:0;background:rgba(10,15,12,.28);z-index:1;pointer-events:none;transition:background .4s ease}
+.card:hover::before{background:rgba(10,15,12,.12)}
+.card:hover img{transform:scale(1.05)}
+.card .label{z-index:2;position:absolute;left:0;right:0;bottom:0;padding:40px 22px 18px;background:linear-gradient(180deg,transparent,rgba(10,15,12,.9));font-weight:700;font-style:italic;font-size:20px}
+.card .label span{color:var(--accent)}
+
+/* Footer */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:44px 6vw;font-size:13px;opacity:.85}
+footer .legal{background:rgba(255,255,255,.06);border-radius:12px;padding:16px 20px;margin-bottom:22px;font-weight:500}
+footer .credit{opacity:.65}
+footer .credit a{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="assets/logo_kurve.png" alt="KURVE" style="height:34px;width:auto">
+  <a class="cta-s" href="#quoten" onclick="document.getElementById('quoten').scrollIntoView({behavior:'smooth'});return false">Jetzt wetten</a>
+</nav>
+
+<header class="hero">
+  <img class="bg" src="assets/hero_jubel_tor.jpg" alt="Torjubel im Stadion bei Sonnenuntergang, Konfetti">
+  <div class="hero-inner">
+    <h1>Der Sommer<br>gehört <em>uns.</em></h1>
+    <p class="sub">Dein Spiel. Deine Quote. Live bei jedem Anpfiff dieser WM,<br>mit Quoten, die zu deinem Bauchgefühl passen.</p>
+    <a class="cta" href="#quoten" onclick="document.getElementById('quoten').scrollIntoView({behavior:'smooth'});return false">Jetzt Quote sichern</a>
+  </div>
+</header>
+
+<div class="odds" id="quoten">
+  <div class="track">
+    <div class="odd"><span class="teams">Australien vs. Ägypten</span><span class="match">Sechzehntelfinale · Fr., 20:00</span><span class="quote">Sieg AUS &nbsp;2.10</span></div>
+    <div class="odd"><span class="teams">Argentinien vs. Kap Verde</span><span class="match">Sechzehntelfinale · Sa., 0:00</span><span class="quote">Über 2,5 Tore &nbsp;1.65</span></div>
+    <div class="odd"><span class="teams">Kolumbien vs. Ghana</span><span class="match">Sechzehntelfinale · Sa., 3:30</span><span class="quote">Beide treffen &nbsp;1.95</span></div>
+    <div class="odd"><span class="teams">Australien vs. Ägypten</span><span class="match">Sechzehntelfinale · Fr., 20:00</span><span class="quote">Sieg AUS &nbsp;2.10</span></div>
+    <div class="odd"><span class="teams">Argentinien vs. Kap Verde</span><span class="match">Sechzehntelfinale · Sa., 0:00</span><span class="quote">Über 2,5 Tore &nbsp;1.65</span></div>
+    <div class="odd"><span class="teams">Kolumbien vs. Ghana</span><span class="match">Sechzehntelfinale · Sa., 3:30</span><span class="quote">Beide treffen &nbsp;1.95</span></div>
+  </div>
+</div>
+
+<section class="world" id="bildwelt">
+  <h2>Wo dein Spiel <span style="color:var(--accent)">lebt.</span></h2>
+  <p class="lead">Vom Bolzplatz bis zur Fankurve: KURVE ist da, wo Fußball wirklich stattfindet und die Quote nur einen Daumen entfernt ist.</p>
+  <div class="grid">
+    <div class="card"><img src="assets/bolzplatz.jpg" alt="Streetsoccer bei Sonnenuntergang"><div class="label">Wo alles <span>anfängt.</span></div></div>
+    <div class="card"><img src="assets/jubel_coral.jpg" alt="Jubelnder Spieler im Konfettiregen"><div class="label">Dein <span>Moment.</span></div></div>
+    <div class="card"><img src="assets/fanfest.jpg" alt="Fans beim Public Viewing"><div class="label">Die Kurve <span>lebt.</span></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="legal">18+ | Glücksspiel kann süchtig machen | Hilfe unter www.check-dein-spiel.de | Spiel mit Verantwortung</div>
+  <p class="credit">KURVE ist eine fiktive Marke. Dieses Projekt ist eine Eigenarbeit zur Demonstration von Kampagnen-Design, KI-Bildproduktion und Formatadaption.<br>
+  Konzept, KI-Produktion &amp; Design: <a href="https://andreskrause.de">Andres Krause</a> · Bildproduktion: Seedream 4.5 / Nano Banana Pro via Magnific · Retusche &amp; De-Branding: KI-gestützt</p>
+</footer>
+
+<script>
+// Alten #quoten-Anker aus der URL entfernen, damit Reload oben startet
+if (location.hash) history.replaceState(null, '', location.pathname);
+</script>
+</body>
+</html>

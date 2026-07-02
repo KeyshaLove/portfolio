@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,800&display=swap" rel="stylesheet">
+<style>
+/* Flutlicht-Motiv, dunkel: Text sitzt auf abgedunkelter rechter Zone.
+   Vertikale Zonen: Logo 8-31 | HL 38-52 | CTA rechts mittig | Legal 80-88 */
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:728px;height:90px;overflow:hidden;font-family:'Poppins',sans-serif;background:#0A0F0C;position:relative;cursor:pointer}
+.bg{position:absolute;inset:0;background:url('anpfiff_strip_728.jpg') center/cover;animation:kb 12s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.06)}}
+.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,15,12,.1) 30%,rgba(10,15,12,.82) 56%)}
+.logo{position:absolute;left:400px;top:8px;width:124px;animation:show 12s infinite}
+@keyframes show{0%{opacity:0}6%,92%{opacity:1}98%,100%{opacity:0}}
+.hl{position:absolute;left:400px;top:42px;font-size:11px;font-weight:800;font-style:italic;color:#fff;text-transform:uppercase;white-space:nowrap;animation:up 12s cubic-bezier(.2,.8,.2,1) infinite}
+.hl em{color:#FEC438;font-style:italic}
+@keyframes up{0%,8%{transform:translateY(16px);opacity:0}15%,90%{transform:translateY(0);opacity:1}97%,100%{transform:translateY(16px);opacity:0}}
+.cta{position:absolute;right:16px;top:26px;background:#FEC438;color:#0A0F0C;font-weight:700;font-size:13px;padding:9px 20px;border-radius:999px;animation:cta 12s infinite}
+@keyframes cta{0%,14%{opacity:0;transform:scale(1)}20%,90%{opacity:1}32%{transform:scale(1.05)}44%{transform:scale(1)}56%{transform:scale(1.05)}68%{transform:scale(1)}96%,100%{opacity:0}}
+.legal{position:absolute;left:400px;top:80px;color:#9a9a9a;font-size:6px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="shade"></div>
+<img class="logo" src="logo_kurve.png" alt="KURVE">
+<div class="hl">Dein Spiel. <em>Deine Quote.</em></div>
+<div class="cta">Jetzt wetten</div>
+<div class="legal">18+ | Glücksspiel kann süchtig machen | check-dein-spiel.de</div>
+</body>
+</html>

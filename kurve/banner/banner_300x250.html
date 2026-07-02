@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,800&display=swap" rel="stylesheet">
+<style>
+/* 12s-Loop: Elemente faden pro Zyklus ein, halten, faden aus */
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:300px;height:250px;overflow:hidden;font-family:'Poppins',sans-serif;background:#0A0F0C;position:relative;cursor:pointer}
+.bg{position:absolute;inset:0;background:url('zweikampf_1200.jpg') 72% 40%/cover;animation:kb 12s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.14)}}
+.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,15,12,.82) 0%,rgba(10,15,12,.45) 45%,rgba(10,15,12,.15) 100%)}
+.shade2{position:absolute;left:0;right:0;bottom:0;height:110px;background:linear-gradient(180deg,transparent,rgba(10,15,12,.9))}
+.logo{position:absolute;top:14px;left:12px;width:124px;animation:show 12s infinite}
+@keyframes show{0%{opacity:0}5%,92%{opacity:1}98%,100%{opacity:0}}
+.hl{position:absolute;left:14px;bottom:92px;font-size:22px;line-height:1.08;font-weight:800;font-style:italic;color:#fff;text-transform:uppercase;animation:slide 12s cubic-bezier(.2,.8,.2,1) infinite}
+.hl em{color:#FEC438;font-style:italic}
+@keyframes slide{0%{transform:translateX(-120%);opacity:0}8%,90%{transform:translateX(0);opacity:1}97%,100%{transform:translateX(-120%);opacity:0}}
+.cta{position:absolute;left:14px;bottom:36px;background:#FEC438;color:#0A0F0C;font-weight:700;font-size:13px;padding:8px 20px;border-radius:999px;animation:cta 12s infinite}
+@keyframes cta{0%,12%{opacity:0;transform:scale(1)}18%,90%{opacity:1}30%{transform:scale(1.06)}42%{transform:scale(1)}54%{transform:scale(1.06)}66%{transform:scale(1)}96%,100%{opacity:0}}
+.legal{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);color:#cfcfcf;font-size:7.5px;text-align:center;padding:4px 6px}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="shade"></div><div class="shade2"></div>
+<img class="logo" src="logo_kurve.png" alt="KURVE">
+<div class="hl">90 Minuten.<br><em>Deine Quote.</em></div>
+<div class="cta">Live wetten</div>
+<div class="legal">18+ | Glücksspiel kann süchtig machen | Hilfe: www.check-dein-spiel.de</div>
+</body>
+</html>

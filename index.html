@@ -67,7 +67,8 @@
           { "@type": "CreativeWork", "position": 1, "name": "Keysha Love", "url": "https://andreskrause.de/#keysha", "description": "Vollständig KI-produzierte virtuelle Soul-Künstlerin: Debütalbum auf allen großen Streaming-Plattformen, visuelle Identität, Social Media, Voice Agent und Website – von einer Person.", "creator": { "@id": "https://andreskrause.de/#person" } },
           { "@type": "CreativeWork", "position": 2, "name": "Pistacia Royale", "url": "https://andreskrause.de/#pistazia", "description": "Fiktive Luxus-Pistazienmarke: vom Logo über Packshot und Mood-/Charakterszenen bis zur Produktanimation, KI-generiert mit konsistenter Farbsprache.", "creator": { "@id": "https://andreskrause.de/#person" } },
           { "@type": "CreativeWork", "position": 3, "name": "Paw Motion", "url": "https://andreskrause.de/#pawmotion", "description": "Konzeptprojekt für ein fiktives Tierprothesen-Startup: KI-Bildproduktion, Motion-Test und Instagram-Reel von Briefing bis Veröffentlichung.", "creator": { "@id": "https://andreskrause.de/#person" } },
-          { "@type": "CreativeWork", "position": 4, "name": "Lufthansa Crew Cabin Experience", "url": "https://andreskrause.de/#lufthansa", "description": "Game-Konzept 'The Cabin Experience' zur Nachwuchsgewinnung: First-Person-Simulation des Kabinencrew-Alltags. KI-generierte Charaktere, Veo-Video, ElevenLabs-Dialoge, Sounddesign in Premiere Pro.", "creator": { "@id": "https://andreskrause.de/#person" } }
+          { "@type": "CreativeWork", "position": 4, "name": "Lufthansa Crew Cabin Experience", "url": "https://andreskrause.de/#lufthansa", "description": "Game-Konzept 'The Cabin Experience' zur Nachwuchsgewinnung: First-Person-Simulation des Kabinencrew-Alltags. KI-generierte Charaktere, Veo-Video, ElevenLabs-Dialoge, Sounddesign in Premiere Pro.", "creator": { "@id": "https://andreskrause.de/#person" } },
+          { "@type": "CreativeWork", "position": 5, "name": "KURVE", "url": "https://andreskrause.de/#kurve", "description": "Fiktive Sportwetten-Marke zum WM-Sommer 2026: KI-Bildkampagne, De-Branding-Retusche, animierte HTML5-Banner, 10-Sekunden-Spot und Landingpage mit Quoten-Ticker, inklusive regulatorischer Pflichthinweise.", "creator": { "@id": "https://andreskrause.de/#person" } }
         ]
       }
     ]
@@ -466,6 +467,25 @@
     }
     .sdot.on { background: var(--accent); width: 20px; border-radius: 100px; }
 
+    /* ============ KURVE ============ */
+    .kurve-fit { overflow: hidden; position: relative; }
+    .kurve-fit iframe { border: 0; display: block; transform-origin: 0 0; pointer-events: none; background: #0A0F0C; }
+    .kurve-live {
+      position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: flex-end;
+      padding: 16px; opacity: 0; transition: opacity .25s ease;
+      background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.5));
+    }
+    a.bwin:hover .kurve-live { opacity: 1; }
+    .kurve-live span {
+      background: rgba(0,0,0,.7); border: 1px solid rgba(255,255,255,.3);
+      padding: 8px 18px; border-radius: 100px; font-size: 12.5px; color: var(--text);
+    }
+    .kurve-sub { display: grid; grid-template-columns: 1fr 1.15fr; gap: 18px; padding: 0 clamp(24px, 3.5vw, 52px) clamp(24px, 3.5vw, 52px); background: #10101a; }
+    .kurve-banners { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; min-width: 0; }
+    .kurve-b-wrap { border: 1px solid var(--border); border-radius: 8px; background: #000; width: 100%; }
+    .kurve-b-wrap.b-sq { max-width: 302px; }
+    @media (max-width: 860px) { .kurve-sub { grid-template-columns: 1fr; } }
+
     /* ============ VIDEO ============ */
     .vid-overlay {
       position: absolute; inset: 0;
@@ -587,6 +607,7 @@
     <a href="#pistazia" class="nav-link">Pistacia Royale</a>
     <a href="#pawmotion" class="nav-link">Paw Motion</a>
     <a href="#lufthansa" class="nav-link">Lufthansa</a>
+    <a href="#kurve" class="nav-link">KURVE</a>
     <a href="https://andreskrause-print.de/print.html" class="nav-link nav-link-print">Print ↗</a>
   </div>
   <div style="display:flex; align-items:center; gap:10px;">
@@ -601,6 +622,7 @@
   <a href="#pistazia">Pistacia Royale</a>
   <a href="#pawmotion">Paw Motion</a>
   <a href="#lufthansa">Lufthansa</a>
+  <a href="#kurve">KURVE</a>
   <a href="https://andreskrause-print.de/print.html" class="mm-print">Print ↗</a>
   <a href="#contact">Kontakt</a>
 </div>
@@ -894,6 +916,70 @@
   </article>
 </div>
 
+<div class="proj-section" id="kurve">
+  <article class="project reveal">
+    <div class="proj-header">
+      <h3 class="proj-title">KURVE</h3>
+      <p class="proj-sub">Fiktive Sportwetten-Marke · Kampagne, Banner & Spot</p>
+    </div>
+    <div class="pane" style="background:#10101a; padding:0;">
+      <div class="browser-grid" style="grid-template-columns:1fr;">
+        <a class="bwin bwin-landscape" href="kurve/" target="_blank" rel="noopener">
+          <div class="bwin-chrome">
+            <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
+            <div class="bwin-url">andreskrause.de/kurve</div>
+          </div>
+          <div class="bwin-screen kurve-fit" data-w="1440" data-h="900">
+            <iframe src="kurve/" width="1440" height="900" loading="lazy" title="KURVE Landingpage – Live-Vorschau" tabindex="-1"></iframe>
+            <div class="kurve-live"><span>Landingpage live ansehen ↗</span></div>
+          </div>
+        </a>
+      </div>
+      <div class="kurve-sub">
+        <div class="kurve-banners">
+          <div class="kurve-b-wrap kurve-fit" data-w="728" data-h="90">
+            <iframe src="kurve/banner/banner_728x90.html" width="728" height="90" loading="lazy" title="KURVE HTML5-Banner 728×90" tabindex="-1"></iframe>
+          </div>
+          <div class="kurve-b-wrap b-sq kurve-fit" data-w="300" data-h="250">
+            <iframe src="kurve/banner/banner_300x250_quoten.html" width="300" height="250" loading="lazy" title="KURVE Quoten-Banner 300×250" tabindex="-1"></iframe>
+          </div>
+        </div>
+        <div class="bwin bwin-landscape" style="cursor:default;">
+          <div class="bwin-chrome">
+            <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
+            <div class="bwin-url">KURVE · Spot 10s</div>
+          </div>
+          <div class="bwin-screen" style="position:relative;">
+            <video id="kurve-v" src="img/opt/kurve_spot.mp4" poster="img/opt/kurve_thumb.webp" preload="none" playsinline loop></video>
+            <div class="vid-overlay" onclick="toggleVid('kurve-v', this)">
+              <div class="play-ring">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info">
+      <p class="proj-desc">KURVE ist eine fiktive deutsche Sportwetten-Marke, entwickelt als komplette Kampagne zum WM-Sommer 2026: Bildwelt in zwei Looks (Flutlicht und WM-Sommer), KI-produziert mit Seedream und Nano Banana Pro, inklusive KI-gestützter Marken-Retusche (De-Branding von Trikots) und Bilderweiterung per Outpainting. Dazu ein 10-Sekunden-Spot (Kling 2.5), animierte HTML5-Banner im Endlos-Loop und eine Landingpage mit laufendem Quoten-Ticker. Die Werbemittel folgen den Vorgaben für Gl&uuml;cksspielwerbung im deutschen Markt (18+, Suchtpr&auml;vention, Hilfsangebot).</p>
+      <div class="proj-box"><strong>Was das zeigt:</strong> Kampagnen-Design von Marke bis Media: konsistente Bildsprache &uuml;ber Formate hinweg, produktionsreife Banner-Adaption und regulatorische Sorgfalt, KI-beschleunigt vom Key Visual bis zum Spot.</div>
+      <div class="proj-tags">
+        <span class="chip">Kampagnen-Design</span>
+        <span class="chip">KI-Bildproduktion</span>
+        <span class="chip">De-Branding-Retusche</span>
+        <span class="chip">HTML5-Banner</span>
+        <span class="chip">Spot / Motion</span>
+        <span class="chip">Landingpage</span>
+      </div>
+      <div class="proj-links">
+        <a class="chip" href="kurve/" target="_blank" rel="noopener">Landingpage ↗</a>
+        <a class="chip" href="kurve/banner/" target="_blank" rel="noopener">Banner-Set ↗</a>
+      </div>
+    </div>
+  </article>
+</div>
+
 <!-- ABOUT + CONTACT -->
 <section id="about">
   <div class="about-grid reveal">
@@ -1002,6 +1088,19 @@
   }
 
   // VIDEO TOGGLE (Lufthansa)
+  function fitKurve() {
+    document.querySelectorAll('.kurve-fit').forEach(function(w){
+      var f = w.querySelector('iframe'); if (!f) return;
+      var W = +w.dataset.w, H = +w.dataset.h;
+      var sc = Math.min(1, w.clientWidth / W);
+      f.style.transform = 'scale(' + sc + ')';
+      w.style.height = (H * sc) + 'px';
+    });
+  }
+  window.addEventListener('resize', fitKurve);
+  window.addEventListener('load', fitKurve);
+  document.addEventListener('DOMContentLoaded', fitKurve);
+
   function toggleVid(id, overlay) {
     const v = document.getElementById(id);
     if (v.paused) { v.play(); v.setAttribute('controls', ''); overlay.style.display = 'none'; }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:300px;height:250px;overflow:hidden;font-family:'Poppins',sans-serif;background:#0A0F0C;position:relative;cursor:pointer}
+.bg{position:absolute;inset:0;background:url('anpfiff_1200.jpg') center 60%/cover;animation:kenburns 12s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.14)}}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,12,.25),rgba(10,15,12,.92) 70%)}
+.logo{position:absolute;top:12px;left:12px;width:124px}
+.live{position:absolute;top:14px;right:12px;background:#FEC438;color:#0A0F0C;font-size:9px;font-weight:700;padding:2px 9px;border-radius:999px;text-transform:uppercase;animation:blink 1.6s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.55}}
+/* Wechselnde Spiele: 3 Slides à 4s */
+.slides{position:absolute;left:12px;right:12px;top:78px;height:86px}
+.slide{position:absolute;inset:0;opacity:0;animation:cycle 12s infinite}
+.slide:nth-child(2){animation-delay:4s}
+.slide:nth-child(3){animation-delay:8s}
+@keyframes cycle{0%{opacity:0;transform:translateY(10px)}4%,29%{opacity:1;transform:translateY(0)}33%,100%{opacity:0;transform:translateY(-8px)}}
+.slide .comp{font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;color:#FEC438;font-weight:600}
+.slide .teams{color:#fff;font-weight:800;font-style:italic;font-size:17px;line-height:1.15;margin:2px 0 7px}
+.slide .quote{display:inline-block;background:rgba(255,200,69,.16);border:1px solid rgba(255,200,69,.45);color:#FEC438;font-weight:700;font-size:13px;padding:4px 12px;border-radius:7px}
+.cta{position:absolute;left:12px;bottom:32px;background:#FEC438;color:#0A0F0C;font-weight:700;font-size:13px;padding:8px 18px;border-radius:999px;animation:pulse 2.4s ease infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.legal{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.78);color:#cfcfcf;font-size:7.5px;text-align:center;padding:4px 6px}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="shade"></div>
+<img class="logo" src="logo_kurve.png" alt="KURVE">
+<div class="slides">
+  <div class="slide"><div class="comp">Sechzehntelfinale · Fr., 20:00</div><div class="teams">Australien vs. Ägypten</div><span class="quote">Sieg AUS &nbsp;2.10</span></div>
+  <div class="slide"><div class="comp">Sechzehntelfinale · Sa., 0:00</div><div class="teams">Argentinien vs. Kap Verde</div><span class="quote">Über 2,5 Tore &nbsp;1.65</span></div>
+  <div class="slide"><div class="comp">Sechzehntelfinale · Sa., 3:30</div><div class="teams">Kolumbien vs. Ghana</div><span class="quote">Beide treffen &nbsp;1.95</span></div>
+</div>
+<div class="cta">Jetzt Quote sichern</div>
+<div class="legal">18+ | Glücksspiel kann süchtig machen | Hilfe: www.check-dein-spiel.de</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,800&display=swap" rel="stylesheet">
+<style>
+/* Motiv exakt 1:2 beschnitten, füllt den Banner ohne Kanten. Weicher Abdecker unten.
+   Vertikale Zonen: Logo 372-406 | HL 426-479 | Sub 492-509 | CTA 516-556 | Legal 584-600 */
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:300px;height:600px;overflow:hidden;font-family:'Poppins',sans-serif;background:#0A0F0C;position:relative;cursor:pointer}
+.bg{position:absolute;inset:0;background:url('fanfest_halfpage.jpg') center/cover;animation:kb 12s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.dim{position:absolute;inset:0;background:rgba(10,15,12,.16)}
+.scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,12,0) 0%,rgba(10,15,12,0) 46%,rgba(10,15,12,.6) 64%,rgba(10,15,12,.96) 82%)}
+.logo{position:absolute;top:384px;left:50%;transform:translateX(-50%);width:150px;animation:show 12s infinite}
+@keyframes show{0%{opacity:0}6%,92%{opacity:1}98%,100%{opacity:0}}
+.hl{position:absolute;left:0;right:0;top:426px;text-align:center;font-size:25px;line-height:1.06;font-weight:800;font-style:italic;color:#fff;text-transform:uppercase;animation:up 12s cubic-bezier(.2,.8,.2,1) infinite}
+.hl em{color:#FEC438;font-style:italic}
+@keyframes up{0%,8%{opacity:0;transform:translateY(18px)}16%,90%{opacity:1;transform:translateY(0)}97%,100%{opacity:0;transform:translateY(18px)}}
+.sub{position:absolute;left:0;right:0;top:492px;text-align:center;font-size:11.5px;color:#cfcfcf;white-space:nowrap;animation:show2 12s infinite}
+@keyframes show2{0%,14%{opacity:0}22%,90%{opacity:1}96%,100%{opacity:0}}
+.cta{position:absolute;left:50%;top:516px;background:#FEC438;color:#0A0F0C;font-weight:700;font-size:14px;padding:10px 26px;border-radius:999px;white-space:nowrap;animation:cta 12s infinite}
+@keyframes cta{0%,18%{opacity:0;transform:translateX(-50%) scale(1)}26%,90%{opacity:1}38%{transform:translateX(-50%) scale(1.05)}50%{transform:translateX(-50%) scale(1)}62%{transform:translateX(-50%) scale(1.05)}74%{transform:translateX(-50%) scale(1)}96%,100%{opacity:0;transform:translateX(-50%) scale(1)}}
+.chip{position:absolute;left:50%;transform:translateX(-50%);top:560px;border:1px solid rgba(254,196,56,.5);color:#FEC438;font-size:10px;font-weight:600;padding:2px 12px;border-radius:999px;white-space:nowrap;animation:chip 12s infinite}
+.chip b{color:#fff;font-weight:700}
+@keyframes chip{0%,22%{opacity:0}30%,90%{opacity:1}96%,100%{opacity:0}}
+.legal{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.78);color:#cfcfcf;font-size:7.5px;text-align:center;padding:4px 6px}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="dim"></div><div class="scrim"></div>
+<img class="logo" src="logo_kurve.png" alt="KURVE">
+<div class="hl">Die Kurve<br><em>lebt.</em></div>
+<div class="sub">Deine Quote zu jedem Anpfiff der WM.</div>
+<div class="cta">Jetzt dabei sein</div>
+<div class="legal">18+ | Glücksspiel kann süchtig machen | Hilfe: www.check-dein-spiel.de</div>
+</body>
+</html>
