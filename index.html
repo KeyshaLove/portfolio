@@ -481,7 +481,7 @@
       padding: 8px 18px; border-radius: 100px; font-size: 12.5px; color: var(--text);
     }
     .kurve-sub { padding: 0 clamp(24px, 3.5vw, 52px) clamp(24px, 3.5vw, 52px); background: #10101a; }
-    .kurve-brow { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; align-items: start; }
+    .kurve-brow { display: grid; grid-template-columns: 1fr 1fr 1.1fr; gap: 18px; align-items: start; }
     .kurve-half { grid-column: 3; grid-row: 1 / 3; }
     .kurve-video { grid-column: 1 / 3; grid-row: 2; align-self: stretch; }
     .kurve-b-wrap { border: 1px solid var(--border); border-radius: 8px; background: #000; width: 100%; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
@@ -944,7 +944,7 @@
             <div class="bwin-url">andreskrause.de/kurve</div>
           </div>
           <div class="bwin-screen kurve-fit" data-w="1440" data-h="900">
-            <iframe src="kurve/index.html" width="1440" height="900" loading="lazy" title="KURVE Landingpage – Live-Vorschau" tabindex="-1"></iframe>
+            <iframe src="kurve/index.html" width="1440" height="900" scrolling="no" loading="lazy" title="KURVE Landingpage – Live-Vorschau" tabindex="-1"></iframe>
             <div class="kurve-live"><span>Landingpage live ansehen ↗</span></div>
           </div>
         </a>
@@ -952,13 +952,13 @@
       <div class="kurve-sub">
         <div class="kurve-brow">
           <div class="kurve-b-wrap kurve-fit" data-w="300" data-h="250" role="button" tabindex="0" onclick="openKurveBanner('kurve/banner/banner_300x250.html',300,250,'Medium Rectangle 300×250')">
-            <iframe src="kurve/banner/banner_300x250.html" width="300" height="250" loading="lazy" title="KURVE HTML5-Banner 300×250" tabindex="-1"></iframe>
+            <iframe src="kurve/banner/banner_300x250.html" width="300" height="250" scrolling="no" loading="lazy" title="KURVE HTML5-Banner 300×250" tabindex="-1"></iframe>
           </div>
           <div class="kurve-b-wrap kurve-fit" data-w="300" data-h="250" role="button" tabindex="0" onclick="openKurveBanner('kurve/banner/banner_300x250_quoten.html',300,250,'Quoten-Banner 300×250')">
-            <iframe src="kurve/banner/banner_300x250_quoten.html" width="300" height="250" loading="lazy" title="KURVE Quoten-Banner 300×250" tabindex="-1"></iframe>
+            <iframe src="kurve/banner/banner_300x250_quoten.html" width="300" height="250" scrolling="no" loading="lazy" title="KURVE Quoten-Banner 300×250" tabindex="-1"></iframe>
           </div>
           <div class="kurve-b-wrap kurve-half kurve-fit" data-w="300" data-h="600" role="button" tabindex="0" onclick="openKurveBanner('kurve/banner/banner_300x600.html',300,600,'Halfpage 300×600')">
-            <iframe src="kurve/banner/banner_300x600.html" width="300" height="600" loading="lazy" title="KURVE Halfpage-Banner 300×600" tabindex="-1"></iframe>
+            <iframe src="kurve/banner/banner_300x600.html" width="300" height="600" scrolling="no" loading="lazy" title="KURVE Halfpage-Banner 300×600" tabindex="-1"></iframe>
           </div>
         <div class="bwin bwin-landscape kurve-video" style="cursor:default;">
           <div class="bwin-chrome">
@@ -1122,13 +1122,34 @@
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeKurveModal(); });
 
   function fitKurve() {
+    var mobile = window.matchMedia('(max-width: 860px)').matches;
     document.querySelectorAll('.kurve-fit').forEach(function(w){
+      if (!mobile && w.classList.contains('kurve-half')) return;
       var f = w.querySelector('iframe'); if (!f) return;
+      w.style.width = '';
       var W = +w.dataset.w, H = +w.dataset.h;
       var sc = Math.min(1, w.clientWidth / W);
       f.style.transform = 'scale(' + sc + ')';
       w.style.height = (H * sc) + 'px';
     });
+    if (!mobile) {
+      var half = document.querySelector('.kurve-half');
+      if (half) {
+        var grid = half.parentElement;
+        var vid = grid.querySelector('.kurve-video');
+        var first = grid.querySelector('.kurve-fit');
+        if (vid && first) {
+          half.style.width = ''; half.style.height = '';
+          var colW = half.clientWidth;
+          var H = vid.getBoundingClientRect().bottom - first.getBoundingClientRect().top;
+          var sc = Math.min(H / 600, colW / 300);
+          var f = half.querySelector('iframe');
+          f.style.transform = 'scale(' + sc + ')';
+          half.style.height = (600 * sc) + 'px';
+          half.style.width = (300 * sc) + 'px';
+        }
+      }
+    }
   }
   window.addEventListener('resize', fitKurve);
   window.addEventListener('load', fitKurve);
