@@ -483,7 +483,7 @@
     .kurve-sub { padding: 0 clamp(24px, 3.5vw, 52px) clamp(24px, 3.5vw, 52px); background: #10101a; }
     .kurve-brow { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 18px; align-items: start; }
     .kurve-half { grid-column: 3; grid-row: 1 / 3; justify-self: end; }
-    .kurve-video { grid-column: 1 / 3; grid-row: 2; align-self: stretch; }
+    .kurve-video { grid-column: 1 / 3; grid-row: 2; align-self: start; }
     .kurve-b-wrap { border: 1px solid var(--border); border-radius: 8px; background: #000; width: 100%; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
     .kurve-b-wrap:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.55); border-color: rgba(255,255,255,.3); }
     @media (max-width: 860px) {
@@ -937,14 +937,14 @@
       <p class="proj-sub">Fiktive Sportwetten-Marke · Kampagne, Banner & Spot</p>
     </div>
     <div class="pane" style="background:#10101a; padding:0;">
-      <div class="browser-grid" style="grid-template-columns:1fr;">
+      <div class="browser-grid" style="grid-template-columns:1fr; padding-bottom:18px;">
         <a class="bwin bwin-landscape" href="kurve/index.html" target="_blank" rel="noopener">
           <div class="bwin-chrome">
             <span class="bdot bdot-r"></span><span class="bdot bdot-y"></span><span class="bdot bdot-g"></span>
             <div class="bwin-url">andreskrause.de/kurve</div>
           </div>
-          <div class="bwin-screen kurve-fit" data-w="1440" data-h="900">
-            <iframe src="kurve/index.html" width="1440" height="900" scrolling="no" loading="lazy" title="KURVE Landingpage – Live-Vorschau" tabindex="-1"></iframe>
+          <div class="bwin-screen kurve-fit" data-w="1440" data-h="1080">
+            <iframe src="kurve/index.html" width="1440" height="1080" scrolling="no" loading="lazy" title="KURVE Landingpage – Live-Vorschau" tabindex="-1"></iframe>
             <div class="kurve-live"><span>Landingpage live ansehen ↗</span></div>
           </div>
         </a>
@@ -966,7 +966,7 @@
             <div class="bwin-url">KURVE · Spot 10s</div>
           </div>
           <div class="bwin-screen" style="position:relative; aspect-ratio:16/9; flex:none;">
-            <video id="kurve-v" src="img/opt/kurve_spot.mp4" poster="img/opt/kurve_thumb.webp" preload="none" playsinline loop style="width:100%;height:100%;object-fit:contain;"></video>
+            <video id="kurve-v" src="img/opt/kurve_spot.mp4" poster="img/opt/kurve_thumb.webp" preload="none" playsinline loop style="width:100%;height:100%;object-fit:cover;"></video>
             <div class="vid-overlay" onclick="toggleVid('kurve-v', this)">
               <div class="play-ring">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
