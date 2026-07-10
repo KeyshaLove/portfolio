@@ -85,12 +85,12 @@ footer .credit a{color:var(--accent)}
 
 <div class="odds" id="quoten">
   <div class="track">
-    <div class="odd"><span class="teams">Australien vs. Ägypten</span><span class="match">Sechzehntelfinale · Fr., 20:00</span><span class="quote">Sieg AUS &nbsp;2.10</span></div>
-    <div class="odd"><span class="teams">Argentinien vs. Kap Verde</span><span class="match">Sechzehntelfinale · Sa., 0:00</span><span class="quote">Über 2,5 Tore &nbsp;1.65</span></div>
-    <div class="odd"><span class="teams">Kolumbien vs. Ghana</span><span class="match">Sechzehntelfinale · Sa., 3:30</span><span class="quote">Beide treffen &nbsp;1.95</span></div>
-    <div class="odd"><span class="teams">Australien vs. Ägypten</span><span class="match">Sechzehntelfinale · Fr., 20:00</span><span class="quote">Sieg AUS &nbsp;2.10</span></div>
-    <div class="odd"><span class="teams">Argentinien vs. Kap Verde</span><span class="match">Sechzehntelfinale · Sa., 0:00</span><span class="quote">Über 2,5 Tore &nbsp;1.65</span></div>
-    <div class="odd"><span class="teams">Kolumbien vs. Ghana</span><span class="match">Sechzehntelfinale · Sa., 3:30</span><span class="quote">Beide treffen &nbsp;1.95</span></div>
+    <div class="odd"><span class="teams">Spanien vs. Belgien</span><span class="match">Viertelfinale · Fr., 21:00</span><span class="quote">Sieg ESP  2.10</span></div>
+    <div class="odd"><span class="teams">Norwegen vs. England</span><span class="match">Viertelfinale · Sa., 23:00</span><span class="quote">Über 2,5 Tore  1.77</span></div>
+    <div class="odd"><span class="teams">Argentinien vs. Schweiz</span><span class="match">Viertelfinale · So., 03:00</span><span class="quote">Über 2,5 Tore  1.65</span></div>
+    <div class="odd"><span class="teams">Spanien vs. Belgien</span><span class="match">Viertelfinale · Fr., 21:00</span><span class="quote">Sieg ESP  2.10</span></div>
+    <div class="odd"><span class="teams">Norwegen vs. England</span><span class="match">Viertelfinale · Sa., 23:00</span><span class="quote">Über 2,5 Tore  1.77</span></div>
+    <div class="odd"><span class="teams">Argentinien vs. Schweiz</span><span class="match">Viertelfinale · So., 03:00</span><span class="quote">Über 2,5 Tore  1.65</span></div>
   </div>
 </div>
 
@@ -113,6 +113,29 @@ footer .credit a{color:var(--accent)}
 <script>
 // Alten #quoten-Anker aus der URL entfernen, damit Reload oben startet
 if (location.hash) history.replaceState(null, '', location.pathname);
+
+// Live-Ticker: laedt data/ticker.json (taeglich per GitHub Action aktualisiert).
+// Schlaegt der Abruf fehl, bleibt der statische Fallback im HTML stehen.
+fetch('data/ticker.json', {cache: 'no-cache'})
+  .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+  .then(function(data){
+    if (!data.items || !data.items.length) return;
+    var track = document.querySelector('.track');
+    if (!track) return;
+    track.innerHTML = '';
+    // Einträge doppelt einfuegen, damit die Endlos-Animation (-50%) nahtlos loopt
+    [data.items, data.items].forEach(function(list){
+      list.forEach(function(it){
+        var odd = document.createElement('div'); odd.className = 'odd';
+        var t = document.createElement('span'); t.className = 'teams'; t.textContent = it.teams;
+        var m = document.createElement('span'); m.className = 'match'; m.textContent = it.match;
+        var q = document.createElement('span'); q.className = 'quote'; q.textContent = it.quote;
+        odd.appendChild(t); odd.appendChild(m); odd.appendChild(q);
+        track.appendChild(odd);
+      });
+    });
+  })
+  .catch(function(){ /* Fallback: statischer Ticker bleibt */ });
 </script>
 </body>
 </html>
