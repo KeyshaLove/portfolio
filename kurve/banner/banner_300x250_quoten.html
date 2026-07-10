@@ -30,11 +30,27 @@ body{width:300px;height:250px;overflow:hidden;font-family:'Poppins',sans-serif;b
 <div class="bg"></div><div class="shade"></div>
 <img class="logo" src="logo_kurve.png" alt="KURVE">
 <div class="slides">
-  <div class="slide"><div class="comp">Sechzehntelfinale · Fr., 20:00</div><div class="teams">Australien vs. Ägypten</div><span class="quote">Sieg AUS &nbsp;2.10</span></div>
-  <div class="slide"><div class="comp">Sechzehntelfinale · Sa., 0:00</div><div class="teams">Argentinien vs. Kap Verde</div><span class="quote">Über 2,5 Tore &nbsp;1.65</span></div>
-  <div class="slide"><div class="comp">Sechzehntelfinale · Sa., 3:30</div><div class="teams">Kolumbien vs. Ghana</div><span class="quote">Beide treffen &nbsp;1.95</span></div>
+  <div class="slide"><div class="comp">Viertelfinale · Fr., 21:00</div><div class="teams">Spanien vs. Belgien</div><span class="quote">Sieg ESP &nbsp;2.10</span></div>
+  <div class="slide"><div class="comp">Viertelfinale · Sa., 23:00</div><div class="teams">Norwegen vs. England</div><span class="quote">Über 2,5 Tore &nbsp;1.77</span></div>
+  <div class="slide"><div class="comp">Viertelfinale · So., 03:00</div><div class="teams">Argentinien vs. Schweiz</div><span class="quote">Über 2,5 Tore &nbsp;1.65</span></div>
 </div>
 <div class="cta">Jetzt Quote sichern</div>
 <div class="legal">18+ | Glücksspiel kann süchtig machen | Hilfe: www.check-dein-spiel.de</div>
+<script>
+// Live-Partien aus data/ticker.json (taeglich per GitHub Action aktualisiert).
+// Bei Fehler bleiben die statischen Slides stehen.
+fetch('../data/ticker.json', {cache: 'no-cache'})
+  .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+  .then(function(data){
+    if (!data.items || !data.items.length) return;
+    var slides = document.querySelectorAll('.slide');
+    data.items.slice(0, slides.length).forEach(function(it, i){
+      slides[i].querySelector('.comp').textContent = it.match;
+      slides[i].querySelector('.teams').textContent = it.teams;
+      slides[i].querySelector('.quote').textContent = it.quote.replace('  ', ' ');
+    });
+  })
+  .catch(function(){ /* Fallback: statische Slides bleiben */ });
+</script>
 </body>
 </html>
