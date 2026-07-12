@@ -1,20 +1,20 @@
 {
-  "updated": "2026-07-11T07:21:19Z",
+  "updated": "2026-07-12T07:38:42Z",
   "items": [
-    {
-      "teams": "Norwegen vs. England",
-      "match": "Viertelfinale · Sa., 23:00",
-      "quote": "Über 2,5 Tore  1.77"
-    },
-    {
-      "teams": "Argentinien vs. Schweiz",
-      "match": "Viertelfinale · So., 03:00",
-      "quote": "Über 2,5 Tore  1.65"
-    },
     {
       "teams": "Frankreich vs. Spanien",
       "match": "Halbfinale · Di., 21:00",
       "quote": "Über 2,5 Tore  2.03"
+    },
+    {
+      "teams": "England vs. Argentinien",
+      "match": "Halbfinale · Mi., 21:00",
+      "quote": "Beide treffen  2.00"
+    },
+    {
+      "teams": "Semifinal 1 Loser vs. Semifinal 2 Loser",
+      "match": "WM 2026 · Sa., 23:00",
+      "quote": "Beide treffen  1.91"
     }
   ]
 }
