@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-14T07:22:16Z",
+  "updated": "2026-07-14T12:20:38Z",
   "items": [
     {
       "teams": "Frankreich vs. Spanien",
@@ -12,9 +12,14 @@
       "quote": "Beide treffen  2.00"
     },
     {
-      "teams": "Semifinal 1 Loser vs. Semifinal 2 Loser",
-      "match": "WM 2026 · Sa., 23:00",
-      "quote": "Beide treffen  1.91"
+      "teams": "Spiel um Platz 3",
+      "match": "Sa., 18.07. · 23:00 Uhr",
+      "quote": ""
+    },
+    {
+      "teams": "Finale",
+      "match": "So., 19.07. · 21:00 Uhr",
+      "quote": ""
     }
   ]
 }

@@ -10,6 +10,7 @@ ticker.json unveraendert (Fallback: letzter bekannter Stand).
 """
 import hashlib
 import json
+import re
 import sys
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -28,7 +29,12 @@ COMPETITIONS = [
 
 # Wie viele Tage nach vorn geschaut wird
 LOOKAHEAD_DAYS = 14
-NUM_ITEMS = 3
+NUM_ITEMS = 4
+
+# Erkennt Platzhalter-Teams vor K.o.-Runden (z.B. "Semifinal 1 Winner",
+# "Semifinal 2 Loser", "TBD") - solche Partien werden ohne Teams und ohne
+# Quote angezeigt, nur Runde + Datum/Uhrzeit.
+PLACEHOLDER_RE = re.compile(r"winner|loser|tbd|sieger|verlierer", re.IGNORECASE)
 
 ROUND_DE = {
     "Round of 32": "Sechzehntelfinale",
@@ -38,6 +44,7 @@ ROUND_DE = {
     "Semifinals": "Halbfinale",
     "Semifinal": "Halbfinale",
     "3rd Place Game": "Spiel um Platz 3",
+    "3rd-Place": "Spiel um Platz 3",
     "Third Place": "Spiel um Platz 3",
     "Final": "Finale",
     "Group Stage": "Gruppenphase",
@@ -148,14 +155,23 @@ def collect():
             local = kickoff.astimezone(BERLIN)
             when = f"{WEEKDAY_DE[local.weekday()]}, {local.strftime('%H:%M')}"
             rnd = de_round(ev, data, label)
+            home_name = home.get("team", {}).get("displayName", "")
+            away_name = away.get("team", {}).get("displayName", "")
+            if PLACEHOLDER_RE.search(home_name) or PLACEHOLDER_RE.search(away_name):
+                # Paarung steht noch nicht fest: nur Runde + Datum/Uhrzeit
+                items.append({
+                    "teams": rnd,
+                    "match": f"{WEEKDAY_DE[local.weekday()]}, {local.strftime('%d.%m.')} · {local.strftime('%H:%M')} Uhr",
+                    "quote": "",
+                })
+                continue
             market, odd = fictional_quote(
                 home.get("team", {}).get("abbreviation", "HEIM"),
                 away.get("team", {}).get("abbreviation", "GAST"),
                 ev["date"],
             )
             items.append({
-                "teams": f"{de_name(home.get('team', {}).get('displayName', ''))} vs. "
-                         f"{de_name(away.get('team', {}).get('displayName', ''))}",
+                "teams": f"{de_name(home_name)} vs. {de_name(away_name)}",
                 "match": f"{rnd} · {when}",
                 "quote": f"{market}  {odd:.2f}",
             })
