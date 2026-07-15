@@ -2,8 +2,10 @@ name: KURVE Ticker aktualisieren
 
 on:
   schedule:
-    # taeglich 05:23 UTC (07:23 Berlin)
-    - cron: "23 5 * * *"
+    # 03:23 + 13:23 UTC (05:23 + 15:23 Berlin bei Sommerzeit).
+    # GitHub verzoegert Schedule-Laeufe erfahrungsgemaess um 2-3h.
+    - cron: "23 3 * * *"
+    - cron: "23 13 * * *"
   workflow_dispatch: {}
 
 permissions:
