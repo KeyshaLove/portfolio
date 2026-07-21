@@ -1,10 +1,25 @@
 {
-  "updated": "2026-07-19T14:36:15Z",
+  "updated": "2026-07-21T05:48:59Z",
   "items": [
     {
-      "teams": "Spanien vs. Argentinien",
-      "match": "Finale · So., 21:00",
-      "quote": "Über 2,5 Tore  1.56"
+      "teams": "FC Bayern vs. Stuttgart",
+      "match": "Bundesliga · Fr., 20:30",
+      "quote": "Sieg VFB  2.22"
+    },
+    {
+      "teams": "Union Berlin vs. Frankfurt",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Über 2,5 Tore  1.62"
+    },
+    {
+      "teams": "1. FC Koeln vs. Hoffenheim",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Sieg KOE  1.98"
+    },
+    {
+      "teams": "Mainz 05 vs. SC Paderborn 07",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Sieg M05  1.73"
     }
   ]
 }

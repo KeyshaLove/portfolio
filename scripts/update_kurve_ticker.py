@@ -27,8 +27,10 @@ COMPETITIONS = [
     ("uefa.champions", "Champions League"),
 ]
 
-# Wie viele Tage nach vorn geschaut wird
-LOOKAHEAD_DAYS = 14
+# Wie viele Tage nach vorn geschaut wird. Grosszuegig bemessen, damit
+# spielfreie Zeiten (z.B. Sommerpause zwischen Turnierende und Liga-Start)
+# ueberbrueckt werden und der Ticker nicht auf altem Stand haengen bleibt.
+LOOKAHEAD_DAYS = 45
 NUM_ITEMS = 4
 
 # Erkennt Platzhalter-Teams vor K.o.-Runden (z.B. "Semifinal 1 Winner",
