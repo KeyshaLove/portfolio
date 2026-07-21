@@ -2,8 +2,11 @@
 """
 KURVE-Ticker-Update: holt die naechsten realen Partien (WM 2026, danach
 Bundesliga/CL) von der oeffentlichen ESPN-API und schreibt kurve/data/ticker.json.
-Quoten sind fiktiv (KURVE ist eine fiktive Marke), aber plausibel und
-deterministisch pro Paarung, damit sie nicht bei jedem Lauf springen.
+Quoten sind fiktiv (KURVE ist eine fiktive Marke), aber am realen
+Marktsignal von ESPN (Favorit + Ueber/Unter-Linie, sofern verfuegbar)
+orientiert statt zufaellig - damit z.B. der Titelverteidiger nicht als
+Aussenseiter erscheint. Deterministisch pro Paarung, damit sie nicht bei
+jedem Lauf springen.
 
 Laeuft ohne API-Key, nur Python-Stdlib. Bei API-Fehler bleibt die bestehende
 ticker.json unveraendert (Fallback: letzter bekannter Stand).
@@ -108,18 +111,69 @@ def de_round(event, data, league_label):
     return league_label
 
 
-def fictional_quote(home_abbr, away_abbr, kickoff_iso):
-    """Deterministisch-plausible fiktive Quote pro Paarung."""
+def parse_favorite(comp, home_abbr, away_abbr):
+    """Liest das reale Marktsignal aus der ESPN-Odds-API (Format 'ABK -390'
+    bzw. 'ABK +130', American Odds). Gibt (favorit_abbr, amerikanische_quote)
+    zurueck, oder None wenn keine Odds-Daten vorliegen (z.B. Termin zu weit
+    in der Zukunft)."""
+    odds_list = comp.get("odds") or []
+    if not odds_list:
+        return None
+    details = odds_list[0].get("details") or ""
+    m = re.match(r"^([A-Za-z0-9]+)\s*([+-]\d+)$", details.strip())
+    if not m:
+        return None
+    abbr, american = m.group(1), int(m.group(2))
+    if abbr not in (home_abbr, away_abbr):
+        return None
+    return abbr, american
+
+
+def american_to_decimal(american):
+    """Standard-Umrechnung American -> Decimal Odds."""
+    if american < 0:
+        return 1 + 100.0 / abs(american)
+    return 1 + american / 100.0
+
+
+def fictional_quote(home_abbr, away_abbr, kickoff_iso, comp):
+    """Fiktive, aber an echten Marktdaten orientierte Quote pro Paarung.
+
+    Nutzt (falls von ESPN geliefert) das reale Favoriten-Signal und die
+    echte Ueber/Unter-Torlinie, rechnet daraus eine eigene, leicht
+    verrauschte Dezimalquote - keine 1:1-Kopie eines Buchmachers, aber
+    realistisch statt zufaellig. Ohne Marktdaten (z.B. Termin weit in der
+    Zukunft) faellt die Funktion auf eine deterministische, aber durch
+    leichten Heimvorteil vorgespannte Wahl zurueck.
+    """
     seed = int(hashlib.sha256(f"{home_abbr}{away_abbr}{kickoff_iso}".encode()).hexdigest(), 16)
+    jitter = 0.9 + ((seed >> 16) % 21) / 100.0  # 0.90 - 1.10
     market = seed % 3
+
+    fav_info = parse_favorite(comp, home_abbr, away_abbr)
+    over_under = None
+    odds_list = comp.get("odds") or []
+    if odds_list:
+        over_under = odds_list[0].get("overUnder")
+
     if market == 0:
-        fav = home_abbr if (seed >> 8) % 2 == 0 else away_abbr
-        odd = 1.55 + ((seed >> 16) % 130) / 100.0  # 1.55 - 2.84
+        if fav_info:
+            fav, american = fav_info
+            odd = round(max(1.10, min(9.50, american_to_decimal(american) * jitter)), 2)
+        else:
+            # Kein Marktsignal: leichter Heimvorteil statt Muenzwurf,
+            # Quote bleibt in einer plausiblen Spanne fuer ausgeglichene Spiele.
+            fav = home_abbr
+            odd = round(1.65 + ((seed >> 16) % 90) / 100.0, 2)  # 1.65 - 2.54
         return f"Sieg {fav}", odd
+
     if market == 1:
-        odd = 1.55 + ((seed >> 16) % 60) / 100.0   # 1.55 - 2.14
-        return "Über 2,5 Tore", odd
-    odd = 1.70 + ((seed >> 16) % 40) / 100.0       # 1.70 - 2.09
+        line = over_under if over_under else 2.5
+        line_str = f"{line:.1f}".replace(".", ",")
+        odd = round(1.55 + ((seed >> 16) % 60) / 100.0, 2)  # 1.55 - 2.14
+        return f"Über {line_str} Tore", odd
+
+    odd = round(1.70 + ((seed >> 16) % 40) / 100.0, 2)  # 1.70 - 2.09
     return "Beide treffen", odd
 
 
@@ -149,9 +203,9 @@ def collect():
             home = next((t for t in teams if t.get("homeAway") == "home"), teams[0])
             away = next((t for t in teams if t.get("homeAway") == "away"), teams[1])
             kickoff = datetime.strptime(ev["date"], "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc)
-            upcoming.append((kickoff, ev, home, away, label, data))
+            upcoming.append((kickoff, ev, home, away, label, data, comp))
         upcoming.sort(key=lambda x: x[0])
-        for kickoff, ev, home, away, label, data in upcoming:
+        for kickoff, ev, home, away, label, data, comp in upcoming:
             if len(items) >= NUM_ITEMS:
                 break
             local = kickoff.astimezone(BERLIN)
@@ -171,6 +225,7 @@ def collect():
                 home.get("team", {}).get("abbreviation", "HEIM"),
                 away.get("team", {}).get("abbreviation", "GAST"),
                 ev["date"],
+                comp,
             )
             items.append({
                 "teams": f"{de_name(home_name)} vs. {de_name(away_name)}",

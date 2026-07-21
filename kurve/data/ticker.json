@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-21T05:48:59Z",
+  "updated": "2026-07-21T05:56:28Z",
   "items": [
     {
       "teams": "FC Bayern vs. Stuttgart",
       "match": "Bundesliga · Fr., 20:30",
-      "quote": "Sieg VFB  2.22"
+      "quote": "Sieg MUN  1.24"
     },
     {
       "teams": "Union Berlin vs. Frankfurt",
@@ -14,12 +14,12 @@
     {
       "teams": "1. FC Koeln vs. Hoffenheim",
       "match": "Bundesliga · Sa., 15:30",
-      "quote": "Sieg KOE  1.98"
+      "quote": "Sieg TSG  1.98"
     },
     {
       "teams": "Mainz 05 vs. SC Paderborn 07",
       "match": "Bundesliga · Sa., 15:30",
-      "quote": "Sieg M05  1.73"
+      "quote": "Sieg M05  1.50"
     }
   ]
 }
