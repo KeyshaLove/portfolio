@@ -571,7 +571,7 @@
 
     /* ============ LIGHTBOX ============ */
     #vid-modal {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999;
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 9999;
       align-items: center; justify-content: center; cursor: pointer;
     }
     #vid-modal video {
@@ -579,7 +579,7 @@
       box-shadow: 0 8px 60px rgba(0,0,0,.8);
     }
     #img-modal {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999;
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 9999;
       align-items: center; justify-content: center; cursor: pointer;
     }
     #img-modal img {
@@ -922,7 +922,12 @@
             <div class="bwin-url">Shot1.mp4 · @pawmotion_de</div>
           </div>
           <div class="bwin-screen" style="position:relative;">
-            <video src="img/opt/pm_shot1.mp4" poster="img/opt/Ansicht2_1.webp" preload="none" controls playsinline></video>
+            <video id="pm-v1" src="img/opt/pm_shot1.mp4" poster="img/opt/Ansicht2_1.webp" preload="none" playsinline></video>
+            <div class="vid-overlay" onclick="toggleVid('pm-v1', this)">
+              <div class="play-ring">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1167,7 +1172,7 @@
     const v = document.getElementById(id);
     if (v.paused) { v.play(); v.setAttribute('controls', ''); overlay.style.display = 'none'; }
   }
-  ['lh-v','pr-v1','pr-v2'].forEach(function(id){
+  ['lh-v','pr-v1','pr-v2','pm-v1'].forEach(function(id){
     var v = document.getElementById(id); if (!v) return;
     v.addEventListener('ended', function() {
       this.removeAttribute('controls');
