@@ -1,82 +1,91 @@
 #!/usr/bin/env python3
 """
-KURVE-Ticker-Update: holt die naechsten realen Partien (WM 2026, danach
-Bundesliga/CL) von der oeffentlichen ESPN-API und schreibt kurve/data/ticker.json.
-Quoten sind fiktiv (KURVE ist eine fiktive Marke), aber am realen
-Marktsignal von ESPN (Favorit + Ueber/Unter-Linie, sofern verfuegbar)
-orientiert statt zufaellig - damit z.B. der Titelverteidiger nicht als
-Aussenseiter erscheint. Deterministisch pro Paarung, damit sie nicht bei
-jedem Lauf springen.
+KURVE-Ticker-Update: holt die naechsten realen Partien (Bundesliga, danach
+Champions League) von der oeffentlichen OpenLigaDB-API und schreibt
+kurve/data/ticker.json.
+
+Quoten sind fiktiv (KURVE ist eine fiktive Marke) - OpenLigaDB liefert keine
+Wettquoten, deshalb werden sie hier deterministisch pro Paarung berechnet
+(leichter Heimvorteil statt Zufall), damit sie nicht bei jedem Lauf springen.
 
 Laeuft ohne API-Key, nur Python-Stdlib. Bei API-Fehler bleibt die bestehende
 ticker.json unveraendert (Fallback: letzter bekannter Stand).
+
+Vorgaenger-Version nutzte ESPNs Hidden-API (site.api.espn.com), die ab
+August 2026 pauschal mit 403/Access Denied blockt (Akamai) - nicht nur fuer
+diesen Runner, sondern auch von privaten Netzen aus getestet. Deshalb Wechsel
+auf OpenLigaDB (offizielle, kostenlose Datenquelle fuer deutschen Fussball).
 """
 import hashlib
 import json
 import re
 import sys
 import urllib.request
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 BERLIN = ZoneInfo("Europe/Berlin")
 OUT = Path(__file__).resolve().parent.parent / "kurve" / "data" / "ticker.json"
 
-# Wettbewerbe in Prioritaetsreihenfolge (ESPN-Slugs)
+# Wettbewerbe in Prioritaetsreihenfolge (OpenLigaDB-Kuerzel).
 COMPETITIONS = [
-    ("fifa.world", "WM 2026"),
-    ("ger.1", "Bundesliga"),
-    ("uefa.champions", "Champions League"),
+    ("bl1", "Bundesliga"),
+    ("ucl2026", "Champions League"),
 ]
 
-# Wie viele Tage nach vorn geschaut wird. Grosszuegig bemessen, damit
-# spielfreie Zeiten (z.B. Sommerpause zwischen Turnierende und Liga-Start)
-# ueberbrueckt werden und der Ticker nicht auf altem Stand haengen bleibt.
-LOOKAHEAD_DAYS = 45
 NUM_ITEMS = 4
+# Wie oft pro Wettbewerb der naechste Spieltag nachgefragt wird, falls der
+# aktuelle schon komplett durch ist (z.B. Montag/Dienstag nach Spieltag-Ende).
+MAX_GROUP_LOOKAHEAD = 4
 
-# Erkennt Platzhalter-Teams vor K.o.-Runden (z.B. "Semifinal 1 Winner",
-# "Semifinal 2 Loser", "TBD") - solche Partien werden ohne Teams und ohne
-# Quote angezeigt, nur Runde + Datum/Uhrzeit.
+# Erkennt Platzhalter-Teams vor K.o.-Runden (z.B. "Sieger Achtelfinale 1",
+# "TBD") - solche Partien werden ohne Teams und ohne Quote angezeigt, nur
+# Runde + Datum/Uhrzeit.
 PLACEHOLDER_RE = re.compile(r"winner|loser|tbd|sieger|verlierer", re.IGNORECASE)
 
-ROUND_DE = {
-    "Round of 32": "Sechzehntelfinale",
-    "Round of 16": "Achtelfinale",
-    "Quarterfinals": "Viertelfinale",
-    "Quarterfinal": "Viertelfinale",
-    "Semifinals": "Halbfinale",
-    "Semifinal": "Halbfinale",
-    "3rd Place Game": "Spiel um Platz 3",
-    "3rd-Place": "Spiel um Platz 3",
-    "Third Place": "Spiel um Platz 3",
-    "Final": "Finale",
-    "Group Stage": "Gruppenphase",
-    "Regular Season": "",
+# Reguläre Spieltage ("3. Spieltag", "Ligaphase") zeigen den Wettbewerbsnamen;
+# alles andere (Achtelfinale, Viertelfinale, ...) ist bereits auf Deutsch und
+# wird unveraendert uebernommen.
+REGULAR_MATCHDAY_RE = re.compile(r"^\d+\.\s*Spieltag$|^Ligaphase$", re.IGNORECASE)
+
+# OpenLigaDB-Teamname -> kurzer Anzeigename im Ticker (ASCII-Stil, wie im
+# Rest der Seite: oe/ae/ue statt Umlaut).
+TEAM_DE = {
+    "FC Augsburg": "Augsburg",
+    "SC Freiburg": "Freiburg",
+    "Borussia Dortmund": "Dortmund",
+    "SV 07 Elversberg": "Elversberg",
+    "1. FSV Mainz 05": "Mainz 05",
+    "FC Bayern München": "FC Bayern",
+    "FC Schalke 04": "Schalke",
+    "Bayer 04 Leverkusen": "Leverkusen",
+    "RB Leipzig": "RB Leipzig",
+    "VfB Stuttgart": "Stuttgart",
+    "SV Werder Bremen": "Werder Bremen",
+    "1. FC Köln": "1. FC Koeln",
+    "SC Paderborn 07": "Paderborn",
+    "Eintracht Frankfurt": "Frankfurt",
+    "1. FC Union Berlin": "Union Berlin",
+    "TSG Hoffenheim": "Hoffenheim",
+    "Borussia Mönchengladbach": "Gladbach",
+    "Hamburger SV": "HSV",
 }
 
-TEAM_DE = {
-    "Spain": "Spanien", "Belgium": "Belgien", "Norway": "Norwegen",
-    "England": "England", "Argentina": "Argentinien", "Switzerland": "Schweiz",
-    "France": "Frankreich", "Germany": "Deutschland", "Brazil": "Brasilien",
-    "Portugal": "Portugal", "Netherlands": "Niederlande", "Italy": "Italien",
-    "Croatia": "Kroatien", "Morocco": "Marokko", "Mexico": "Mexiko",
-    "United States": "USA", "USA": "USA", "Canada": "Kanada",
-    "Japan": "Japan", "South Korea": "Suedkorea", "Australia": "Australien",
-    "Egypt": "Aegypten", "Ghana": "Ghana", "Colombia": "Kolumbien",
-    "Cape Verde": "Kap Verde", "Uruguay": "Uruguay", "Ecuador": "Ecuador",
-    "Senegal": "Senegal", "Denmark": "Daenemark", "Austria": "Oesterreich",
-    "Poland": "Polen", "Scotland": "Schottland", "Turkey": "Tuerkei",
-    "Bayern Munich": "FC Bayern", "Borussia Dortmund": "Dortmund",
-    "Borussia Monchengladbach": "Gladbach", "Bayer Leverkusen": "Leverkusen",
-    "RB Leipzig": "RB Leipzig", "Eintracht Frankfurt": "Frankfurt",
-    "VfB Stuttgart": "Stuttgart", "SC Freiburg": "Freiburg",
-    "1. FC Union Berlin": "Union Berlin", "FC Cologne": "1. FC Koeln",
-    "1. FC Koln": "1. FC Koeln", "TSG Hoffenheim": "Hoffenheim",
-    "Werder Bremen": "Werder Bremen", "VfL Wolfsburg": "Wolfsburg",
-    "Hamburg SV": "HSV", "FC St. Pauli": "St. Pauli", "Mainz": "Mainz 05",
-    "FC Augsburg": "Augsburg", "1. FC Heidenheim": "Heidenheim",
+# Kurzform -> Abkuerzung fuer "Sieg XXX" in der Quote.
+TEAM_ABBR = {
+    "Augsburg": "FCA", "Freiburg": "SCF", "Dortmund": "BVB",
+    "Elversberg": "ELV", "Mainz 05": "M05", "FC Bayern": "FCB",
+    "Schalke": "S04", "Leverkusen": "B04", "RB Leipzig": "RBL",
+    "Stuttgart": "VFB", "Werder Bremen": "SVW", "1. FC Koeln": "KOE",
+    "Paderborn": "SCP", "Frankfurt": "SGE", "Union Berlin": "FCU",
+    "Hoffenheim": "TSG", "Gladbach": "BMG", "HSV": "HSV",
+    # Bekannte Champions-League-Klubs, damit die Quote nicht mit vollem
+    # Namen ("Sieg Real Madrid") sondern als Kuerzel erscheint.
+    "Real Madrid": "RMA", "Manchester City": "MCI", "Atletico Madrid": "ATM",
+    "FC Liverpool": "LIV", "Manchester United": "MUN", "FC Arsenal": "ARS",
+    "FC Chelsea": "CHE", "Paris Saint-Germain": "PSG", "FC Barcelona": "BAR",
+    "Inter Mailand": "INT", "AC Mailand": "ACM", "Juventus Turin": "JUV",
 }
 
 WEEKDAY_DE = ["Mo.", "Di.", "Mi.", "Do.", "Fr.", "Sa.", "So."]
@@ -92,146 +101,126 @@ def de_name(name):
     return TEAM_DE.get(name, name)
 
 
-def de_round(event, data, league_label):
-    note = event.get("season", {}).get("slug") or ""
-    alt = event.get("competitions", [{}])[0].get("altGameNote") or ""
-    stype = (data.get("season") or {}).get("type")
-    # season.type kann dict oder int sein, je nach Liga
-    tname = ""
-    if isinstance(stype, dict):
-        tname = stype.get("name", "")
-    for src in (alt.split(", ")[-1] if alt else "", tname, note):
-        if src in ROUND_DE:
-            r = ROUND_DE[src]
-            return r if r else league_label
-        if src:
-            for en, de in ROUND_DE.items():
-                if en.lower() in src.lower():
-                    return de if de else league_label
-    return league_label
+def abbr(display_name, full_name):
+    if display_name in TEAM_ABBR:
+        return TEAM_ABBR[display_name]
+    if full_name in TEAM_ABBR:
+        return TEAM_ABBR[full_name]
+    # Fallback: erste drei Buchstaben des ersten "eigenstaendigen" Worts.
+    words = [w for w in re.findall(r"[A-Za-zÄÖÜäöüß]+", display_name)]
+    if not words:
+        return "GAST"
+    return words[0][:3].upper()
 
 
-def parse_favorite(comp, home_abbr, away_abbr):
-    """Liest das reale Marktsignal aus der ESPN-Odds-API (Format 'ABK -390'
-    bzw. 'ABK +130', American Odds). Gibt (favorit_abbr, amerikanische_quote)
-    zurueck, oder None wenn keine Odds-Daten vorliegen (z.B. Termin zu weit
-    in der Zukunft)."""
-    odds_list = comp.get("odds") or []
-    if not odds_list:
-        return None
-    details = odds_list[0].get("details") or ""
-    m = re.match(r"^([A-Za-z0-9]+)\s*([+-]\d+)$", details.strip())
-    if not m:
-        return None
-    abbr, american = m.group(1), int(m.group(2))
-    if abbr not in (home_abbr, away_abbr):
-        return None
-    return abbr, american
+def de_round(group_name, league_label):
+    if not group_name or REGULAR_MATCHDAY_RE.match(group_name.strip()):
+        return league_label
+    return group_name
 
 
-def american_to_decimal(american):
-    """Standard-Umrechnung American -> Decimal Odds."""
-    if american < 0:
-        return 1 + 100.0 / abs(american)
-    return 1 + american / 100.0
-
-
-def fictional_quote(home_abbr, away_abbr, kickoff_iso, comp):
-    """Fiktive, aber an echten Marktdaten orientierte Quote pro Paarung.
-
-    Nutzt (falls von ESPN geliefert) das reale Favoriten-Signal und die
-    echte Ueber/Unter-Torlinie, rechnet daraus eine eigene, leicht
-    verrauschte Dezimalquote - keine 1:1-Kopie eines Buchmachers, aber
-    realistisch statt zufaellig. Ohne Marktdaten (z.B. Termin weit in der
-    Zukunft) faellt die Funktion auf eine deterministische, aber durch
-    leichten Heimvorteil vorgespannte Wahl zurueck.
-    """
-    seed = int(hashlib.sha256(f"{home_abbr}{away_abbr}{kickoff_iso}".encode()).hexdigest(), 16)
-    jitter = 0.9 + ((seed >> 16) % 21) / 100.0  # 0.90 - 1.10
+def fictional_quote(home_disp, away_disp, kickoff_iso):
+    """Fiktive Quote pro Paarung, deterministisch (nicht zufaellig bei jedem
+    Lauf), mit leichtem Heimvorteil - OpenLigaDB liefert keine echten
+    Wettquoten, anders als frueher ESPN."""
+    seed = int(hashlib.sha256(f"{home_disp}{away_disp}{kickoff_iso}".encode()).hexdigest(), 16)
+    jitter_bucket = (seed >> 16) % 100
     market = seed % 3
 
-    fav_info = parse_favorite(comp, home_abbr, away_abbr)
-    over_under = None
-    odds_list = comp.get("odds") or []
-    if odds_list:
-        over_under = odds_list[0].get("overUnder")
-
     if market == 0:
-        if fav_info:
-            fav, american = fav_info
-            odd = round(max(1.10, min(9.50, american_to_decimal(american) * jitter)), 2)
-        else:
-            # Kein Marktsignal: leichter Heimvorteil statt Muenzwurf,
-            # Quote bleibt in einer plausiblen Spanne fuer ausgeglichene Spiele.
-            fav = home_abbr
-            odd = round(1.65 + ((seed >> 16) % 90) / 100.0, 2)  # 1.65 - 2.54
-        return f"Sieg {fav}", odd
+        fav = home_disp
+        odd = round(1.65 + (jitter_bucket % 90) / 100.0, 2)  # 1.65 - 2.54
+        return f"Sieg {abbr(fav, fav)}", odd
 
     if market == 1:
-        line = over_under if over_under else 2.5
-        line_str = f"{line:.1f}".replace(".", ",")
-        odd = round(1.55 + ((seed >> 16) % 60) / 100.0, 2)  # 1.55 - 2.14
-        return f"Über {line_str} Tore", odd
+        odd = round(1.55 + (jitter_bucket % 60) / 100.0, 2)  # 1.55 - 2.14
+        return "Über 2,5 Tore", odd
 
-    odd = round(1.70 + ((seed >> 16) % 40) / 100.0, 2)  # 1.70 - 2.09
+    odd = round(1.70 + (jitter_bucket % 40) / 100.0, 2)  # 1.70 - 2.09
     return "Beide treffen", odd
 
 
-def collect():
-    now = datetime.now(timezone.utc)
-    date_range = f"{now.strftime('%Y%m%d')}-{(now + timedelta(days=LOOKAHEAD_DAYS)).strftime('%Y%m%d')}"
-    items = []
-    for slug, label in COMPETITIONS:
-        if len(items) >= NUM_ITEMS:
-            break
-        url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{slug}/scoreboard?dates={date_range}"
+def fetch_matchday(shortcut, season=None, group=None):
+    if season is not None and group is not None:
+        url = f"https://api.openligadb.de/getmatchdata/{shortcut}/{season}/{group}"
+    else:
+        url = f"https://api.openligadb.de/getmatchdata/{shortcut}"
+    return fetch_json(url)
+
+
+def upcoming_matches(shortcut, needed):
+    """Liefert bis zu `needed` kommende (nicht beendete) Partien, sortiert
+    nach Anstoss. Wenn der aktuell laufende Spieltag schon durch ist, wird
+    automatisch der naechste Spieltag nachgeladen."""
+    try:
+        matches = fetch_matchday(shortcut)
+    except Exception as e:
+        print(f"WARN: {shortcut} nicht erreichbar: {e}", file=sys.stderr)
+        return []
+    if not matches:
+        return []
+
+    season = matches[0]["leagueSeason"]
+    group_order = matches[0]["group"]["groupOrderID"]
+    collected = [m for m in matches if not m.get("matchIsFinished")]
+
+    lookahead = 0
+    while len(collected) < needed and lookahead < MAX_GROUP_LOOKAHEAD:
+        group_order += 1
+        lookahead += 1
         try:
-            data = fetch_json(url)
+            more = fetch_matchday(shortcut, season, group_order)
         except Exception as e:
-            print(f"WARN: {slug} nicht erreichbar: {e}", file=sys.stderr)
-            continue
-        events = data.get("events", [])
-        upcoming = []
-        for ev in events:
-            state = ev.get("status", {}).get("type", {}).get("state", "")
-            if state != "pre":
-                continue
-            comp = ev.get("competitions", [{}])[0]
-            teams = comp.get("competitors", [])
-            if len(teams) != 2:
-                continue
-            home = next((t for t in teams if t.get("homeAway") == "home"), teams[0])
-            away = next((t for t in teams if t.get("homeAway") == "away"), teams[1])
-            kickoff = datetime.strptime(ev["date"], "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc)
-            upcoming.append((kickoff, ev, home, away, label, data, comp))
-        upcoming.sort(key=lambda x: x[0])
-        for kickoff, ev, home, away, label, data, comp in upcoming:
-            if len(items) >= NUM_ITEMS:
-                break
+            print(f"WARN: {shortcut} Spieltag {group_order} nicht erreichbar: {e}", file=sys.stderr)
+            break
+        if not more:
+            break
+        collected += [m for m in more if not m.get("matchIsFinished")]
+
+    collected.sort(key=lambda m: m["matchDateTimeUTC"])
+    return collected[:needed]
+
+
+def collect():
+    items = []
+    for shortcut, label in COMPETITIONS:
+        remaining = NUM_ITEMS - len(items)
+        if remaining <= 0:
+            break
+        for m in upcoming_matches(shortcut, remaining):
+            kickoff = datetime.strptime(m["matchDateTimeUTC"], "%Y-%m-%dT%H:%M:%SZ").replace(
+                tzinfo=timezone.utc
+            )
             local = kickoff.astimezone(BERLIN)
             when = f"{WEEKDAY_DE[local.weekday()]}, {local.strftime('%H:%M')}"
-            rnd = de_round(ev, data, label)
-            home_name = home.get("team", {}).get("displayName", "")
-            away_name = away.get("team", {}).get("displayName", "")
-            if PLACEHOLDER_RE.search(home_name) or PLACEHOLDER_RE.search(away_name):
-                # Paarung steht noch nicht fest: nur Runde + Datum/Uhrzeit
+            rnd = de_round(m.get("group", {}).get("groupName", ""), label)
+
+            home_full = (m.get("team1") or {}).get("teamName") or ""
+            away_full = (m.get("team2") or {}).get("teamName") or ""
+
+            if (
+                not home_full
+                or not away_full
+                or PLACEHOLDER_RE.search(home_full)
+                or PLACEHOLDER_RE.search(away_full)
+            ):
                 items.append({
                     "teams": rnd,
                     "match": f"{WEEKDAY_DE[local.weekday()]}, {local.strftime('%d.%m.')} · {local.strftime('%H:%M')} Uhr",
                     "quote": "",
                 })
                 continue
-            market, odd = fictional_quote(
-                home.get("team", {}).get("abbreviation", "HEIM"),
-                away.get("team", {}).get("abbreviation", "GAST"),
-                ev["date"],
-                comp,
-            )
+
+            home_disp = de_name(home_full)
+            away_disp = de_name(away_full)
+            market, odd = fictional_quote(home_disp, away_disp, m["matchDateTimeUTC"])
             items.append({
-                "teams": f"{de_name(home_name)} vs. {de_name(away_name)}",
+                "teams": f"{home_disp} vs. {away_disp}",
                 "match": f"{rnd} · {when}",
-                "quote": f"{market}  {odd:.2f}",
+                "quote": f"{market}  {odd:.2f}",
             })
+            if len(items) >= NUM_ITEMS:
+                break
     return items
 
 
