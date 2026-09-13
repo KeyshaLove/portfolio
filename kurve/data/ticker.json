@@ -1,25 +1,25 @@
 {
-  "updated": "2026-09-12T16:23:00Z",
+  "updated": "2026-09-13T08:25:28Z",
   "items": [
     {
-      "teams": "Dortmund vs. Paderborn",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Sieg BVB  2.01"
+      "teams": "RB Leipzig vs. HSV",
+      "match": "Bundesliga · So., 15:30",
+      "quote": "Sieg RBL  1.75"
     },
     {
-      "teams": "Hoffenheim vs. Stuttgart",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Über 2,5 Tore  1.94"
+      "teams": "Elversberg vs. FC Bayern",
+      "match": "Bundesliga · So., 17:30",
+      "quote": "Über 2,5 Tore  2.00"
     },
     {
-      "teams": "Freiburg vs. Gladbach",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Beide treffen  1.87"
+      "teams": "FC Bayern vs. Union Berlin",
+      "match": "Bundesliga · Fr., 20:30",
+      "quote": "Beide treffen  1.78"
     },
     {
-      "teams": "Augsburg vs. Leverkusen",
+      "teams": "Frankfurt vs. Freiburg",
       "match": "Bundesliga · Sa., 15:30",
-      "quote": "Über 2,5 Tore  1.55"
+      "quote": "Beide treffen  2.09"
     }
   ]
 }
