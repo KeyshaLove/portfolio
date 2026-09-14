@@ -1,16 +1,6 @@
 {
-  "updated": "2026-09-13T16:59:27Z",
+  "updated": "2026-09-14T09:05:31Z",
   "items": [
-    {
-      "teams": "RB Leipzig vs. HSV",
-      "match": "Bundesliga · So., 15:30",
-      "quote": "Sieg RBL  1.75"
-    },
-    {
-      "teams": "Elversberg vs. FC Bayern",
-      "match": "Bundesliga · So., 17:30",
-      "quote": "Über 2,5 Tore  2.00"
-    },
     {
       "teams": "FC Bayern vs. Union Berlin",
       "match": "Bundesliga · Fr., 20:30",
@@ -20,6 +10,16 @@
       "teams": "Frankfurt vs. Freiburg",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Beide treffen  2.09"
+    },
+    {
+      "teams": "Gladbach vs. Mainz 05",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Beide treffen  1.74"
+    },
+    {
+      "teams": "HSV vs. 1. FC Koeln",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Beide treffen  1.86"
     }
   ]
 }
