@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-15T17:41:53Z",
+  "updated": "2026-09-16T08:42:22Z",
   "items": [
     {
       "teams": "FC Bayern vs. Union Berlin",
@@ -12,14 +12,14 @@
       "quote": "Beide treffen  2.09"
     },
     {
-      "teams": "HSV vs. 1. FC Koeln",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Beide treffen  1.86"
-    },
-    {
       "teams": "Gladbach vs. Mainz 05",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Beide treffen  1.74"
+    },
+    {
+      "teams": "HSV vs. 1. FC Koeln",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Beide treffen  1.86"
     }
   ]
 }
