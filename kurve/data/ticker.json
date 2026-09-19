@@ -1,11 +1,6 @@
 {
-  "updated": "2026-09-18T17:07:15Z",
+  "updated": "2026-09-19T08:09:36Z",
   "items": [
-    {
-      "teams": "FC Bayern vs. Union Berlin",
-      "match": "Bundesliga · Fr., 20:30",
-      "quote": "Beide treffen  1.78"
-    },
     {
       "teams": "Frankfurt vs. Freiburg",
       "match": "Bundesliga · Sa., 15:30",
@@ -20,6 +15,11 @@
       "teams": "HSV vs. 1. FC Koeln",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Beide treffen  1.86"
+    },
+    {
+      "teams": "Werder Bremen vs. Augsburg",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Sieg SVW  1.67"
     }
   ]
 }
