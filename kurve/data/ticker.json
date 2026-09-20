@@ -1,11 +1,6 @@
 {
-  "updated": "2026-09-20T08:41:54Z",
+  "updated": "2026-09-20T16:54:21Z",
   "items": [
-    {
-      "teams": "Leverkusen vs. RB Leipzig",
-      "match": "Bundesliga · So., 15:30",
-      "quote": "Sieg B04  2.52"
-    },
     {
       "teams": "Schalke vs. Elversberg",
       "match": "Bundesliga · So., 17:30",
@@ -20,6 +15,11 @@
       "teams": "Dortmund vs. Werder Bremen",
       "match": "Bundesliga · Fr., 20:30",
       "quote": "Über 2,5 Tore  1.74"
+    },
+    {
+      "teams": "Hoffenheim vs. HSV",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Sieg TSG  1.96"
     }
   ]
 }
