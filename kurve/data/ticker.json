@@ -1,16 +1,6 @@
 {
-  "updated": "2026-09-20T16:54:21Z",
+  "updated": "2026-09-21T09:07:21Z",
   "items": [
-    {
-      "teams": "Schalke vs. Elversberg",
-      "match": "Bundesliga · So., 17:30",
-      "quote": "Beide treffen  2.06"
-    },
-    {
-      "teams": "Paderborn vs. Hoffenheim",
-      "match": "Bundesliga · So., 19:30",
-      "quote": "Sieg SCP  1.74"
-    },
     {
       "teams": "Dortmund vs. Werder Bremen",
       "match": "Bundesliga · Fr., 20:30",
@@ -20,6 +10,16 @@
       "teams": "Hoffenheim vs. HSV",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Sieg TSG  1.96"
+    },
+    {
+      "teams": "Augsburg vs. FC Bayern",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Sieg FCA  1.74"
+    },
+    {
+      "teams": "Mainz 05 vs. Leverkusen",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Über 2,5 Tore  1.56"
     }
   ]
 }
