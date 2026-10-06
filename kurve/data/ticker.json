@@ -1,15 +1,10 @@
 {
-  "updated": "2026-10-05T10:39:24Z",
+  "updated": "2026-10-06T10:32:36Z",
   "items": [
     {
       "teams": "Dortmund vs. Werder Bremen",
       "match": "Bundesliga · Fr., 20:30",
       "quote": "Über 2,5 Tore  1.74"
-    },
-    {
-      "teams": "Paderborn vs. Stuttgart",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Über 2,5 Tore  2.10"
     },
     {
       "teams": "Hoffenheim vs. HSV",
@@ -20,6 +15,11 @@
       "teams": "Augsburg vs. FC Bayern",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Sieg FCA  1.74"
+    },
+    {
+      "teams": "Mainz 05 vs. Leverkusen",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Über 2,5 Tore  1.56"
     }
   ]
 }
