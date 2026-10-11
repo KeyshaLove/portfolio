@@ -1,25 +1,25 @@
 {
-  "updated": "2026-10-10T17:54:38Z",
+  "updated": "2026-10-11T10:09:16Z",
   "items": [
     {
-      "teams": "Hoffenheim vs. HSV",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Sieg TSG  1.96"
+      "teams": "1. FC Koeln vs. Gladbach",
+      "match": "Bundesliga · So., 15:30",
+      "quote": "Beide treffen  1.84"
     },
     {
-      "teams": "Augsburg vs. FC Bayern",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Sieg FCA  1.74"
+      "teams": "Freiburg vs. Schalke",
+      "match": "Bundesliga · So., 17:30",
+      "quote": "Sieg SCF  1.71"
     },
     {
-      "teams": "Mainz 05 vs. Leverkusen",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Über 2,5 Tore  1.56"
+      "teams": "Frankfurt vs. 1. FC Koeln",
+      "match": "Bundesliga · Fr., 20:30",
+      "quote": "Beide treffen  1.92"
     },
     {
-      "teams": "Union Berlin vs. Elversberg",
+      "teams": "Union Berlin vs. Dortmund",
       "match": "Bundesliga · Sa., 15:30",
-      "quote": "Über 2,5 Tore  1.80"
+      "quote": "Sieg FCU  2.13"
     }
   ]
 }
