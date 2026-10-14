@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-14T08:51:37Z",
+  "updated": "2026-10-14T18:04:13Z",
   "items": [
     {
       "teams": "Frankfurt vs. 1. FC Koeln",
@@ -7,19 +7,19 @@
       "quote": "Beide treffen  1.92"
     },
     {
-      "teams": "HSV vs. Stuttgart",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Beide treffen  1.86"
-    },
-    {
-      "teams": "Werder Bremen vs. Paderborn",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Sieg SVW  2.53"
-    },
-    {
       "teams": "Elversberg vs. Augsburg",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Sieg ELV  2.10"
+    },
+    {
+      "teams": "Union Berlin vs. Dortmund",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Sieg FCU  2.13"
+    },
+    {
+      "teams": "HSV vs. Stuttgart",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Beide treffen  1.86"
     }
   ]
 }
