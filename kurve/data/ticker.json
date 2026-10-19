@@ -1,11 +1,6 @@
 {
-  "updated": "2026-10-18T16:37:21Z",
+  "updated": "2026-10-19T09:05:48Z",
   "items": [
-    {
-      "teams": "Gladbach vs. Hoffenheim",
-      "match": "Bundesliga · So., 17:30",
-      "quote": "Sieg BMG  2.34"
-    },
     {
       "teams": "Stuttgart vs. Gladbach",
       "match": "Bundesliga · Fr., 20:30",
@@ -20,6 +15,11 @@
       "teams": "Augsburg vs. Union Berlin",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Über 2,5 Tore  2.09"
+    },
+    {
+      "teams": "Mainz 05 vs. Werder Bremen",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Sieg M05  2.36"
     }
   ]
 }
