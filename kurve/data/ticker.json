@@ -1,15 +1,10 @@
 {
-  "updated": "2026-10-19T19:22:42Z",
+  "updated": "2026-10-20T08:42:30Z",
   "items": [
     {
       "teams": "Stuttgart vs. Gladbach",
       "match": "Bundesliga · Fr., 20:30",
       "quote": "Sieg VFB  2.09"
-    },
-    {
-      "teams": "1. FC Koeln vs. Schalke",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Sieg KOE  1.97"
     },
     {
       "teams": "RB Leipzig vs. Elversberg",
@@ -20,6 +15,11 @@
       "teams": "Augsburg vs. Union Berlin",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Über 2,5 Tore  2.09"
+    },
+    {
+      "teams": "Mainz 05 vs. Werder Bremen",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Sieg M05  2.36"
     }
   ]
 }
