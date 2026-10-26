@@ -1,16 +1,6 @@
 {
-  "updated": "2026-10-25T17:06:25Z",
+  "updated": "2026-10-26T09:09:08Z",
   "items": [
-    {
-      "teams": "Hoffenheim vs. Leverkusen",
-      "match": "Bundesliga · So., 15:30",
-      "quote": "Über 2,5 Tore  1.71"
-    },
-    {
-      "teams": "Freiburg vs. FC Bayern",
-      "match": "Bundesliga · So., 17:30",
-      "quote": "Beide treffen  2.00"
-    },
     {
       "teams": "Elversberg vs. Mainz 05",
       "match": "Bundesliga · Fr., 20:30",
@@ -20,6 +10,16 @@
       "teams": "Leverkusen vs. Stuttgart",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Über 2,5 Tore  1.64"
+    },
+    {
+      "teams": "Augsburg vs. Freiburg",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Über 2,5 Tore  1.79"
+    },
+    {
+      "teams": "Gladbach vs. Paderborn",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Über 2,5 Tore  1.83"
     }
   ]
 }
