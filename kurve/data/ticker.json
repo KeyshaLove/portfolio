@@ -1,11 +1,6 @@
 {
-  "updated": "2026-10-30T18:40:46Z",
+  "updated": "2026-10-31T09:48:50Z",
   "items": [
-    {
-      "teams": "Elversberg vs. Mainz 05",
-      "match": "Bundesliga · Fr., 20:30",
-      "quote": "Beide treffen  1.84"
-    },
     {
       "teams": "Leverkusen vs. Stuttgart",
       "match": "Bundesliga · Sa., 15:30",
@@ -20,6 +15,11 @@
       "teams": "Gladbach vs. Paderborn",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Über 2,5 Tore  1.83"
+    },
+    {
+      "teams": "Werder Bremen vs. Hoffenheim",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Beide treffen  1.81"
     }
   ]
 }
