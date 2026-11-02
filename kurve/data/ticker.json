@@ -1,16 +1,6 @@
 {
-  "updated": "2026-11-01T18:27:29Z",
+  "updated": "2026-11-02T11:27:18Z",
   "items": [
-    {
-      "teams": "Union Berlin vs. 1. FC Koeln",
-      "match": "Bundesliga · So., 15:30",
-      "quote": "Über 2,5 Tore  2.00"
-    },
-    {
-      "teams": "Frankfurt vs. HSV",
-      "match": "Bundesliga · So., 17:30",
-      "quote": "Sieg SGE  1.70"
-    },
     {
       "teams": "HSV vs. Gladbach",
       "match": "Bundesliga · Fr., 20:30",
@@ -20,6 +10,16 @@
       "teams": "Dortmund vs. Elversberg",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Beide treffen  2.05"
+    },
+    {
+      "teams": "RB Leipzig vs. Augsburg",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Über 2,5 Tore  1.90"
+    },
+    {
+      "teams": "Mainz 05 vs. FC Bayern",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Über 2,5 Tore  2.11"
     }
   ]
 }
