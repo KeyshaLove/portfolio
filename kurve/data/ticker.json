@@ -1,11 +1,6 @@
 {
-  "updated": "2026-11-06T19:59:14Z",
+  "updated": "2026-11-07T10:28:18Z",
   "items": [
-    {
-      "teams": "HSV vs. Gladbach",
-      "match": "Bundesliga · Fr., 20:30",
-      "quote": "Über 2,5 Tore  1.82"
-    },
     {
       "teams": "Dortmund vs. Elversberg",
       "match": "Bundesliga · Sa., 15:30",
@@ -20,6 +15,11 @@
       "teams": "Mainz 05 vs. FC Bayern",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Über 2,5 Tore  2.11"
+    },
+    {
+      "teams": "Paderborn vs. Frankfurt",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Sieg SCP  2.08"
     }
   ]
 }
