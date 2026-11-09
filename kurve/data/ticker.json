@@ -1,25 +1,25 @@
 {
-  "updated": "2026-11-08T18:24:00Z",
+  "updated": "2026-11-09T11:50:36Z",
   "items": [
-    {
-      "teams": "1. FC Koeln vs. Leverkusen",
-      "match": "Bundesliga · So., 15:30",
-      "quote": "Über 2,5 Tore  1.82"
-    },
-    {
-      "teams": "Freiburg vs. Union Berlin",
-      "match": "Bundesliga · So., 17:30",
-      "quote": "Beide treffen  1.85"
-    },
-    {
-      "teams": "Hoffenheim vs. Schalke",
-      "match": "Bundesliga · So., 19:30",
-      "quote": "Sieg TSG  1.84"
-    },
     {
       "teams": "FC Bayern vs. 1. FC Koeln",
       "match": "Bundesliga · Fr., 20:30",
       "quote": "Sieg FCB  2.34"
+    },
+    {
+      "teams": "Leverkusen vs. Paderborn",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Beide treffen  1.91"
+    },
+    {
+      "teams": "Frankfurt vs. Hoffenheim",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Beide treffen  1.83"
+    },
+    {
+      "teams": "Union Berlin vs. RB Leipzig",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Über 2,5 Tore  2.10"
     }
   ]
 }
