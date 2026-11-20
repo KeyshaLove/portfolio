@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T21:40:56Z",
+  "updated": "2026-11-20T11:55:30Z",
   "items": [
     {
       "teams": "FC Bayern vs. 1. FC Koeln",
@@ -7,19 +7,19 @@
       "quote": "Sieg FCB  2.34"
     },
     {
-      "teams": "Gladbach vs. Dortmund",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Beide treffen  2.02"
-    },
-    {
-      "teams": "Elversberg vs. Freiburg",
-      "match": "Bundesliga · Sa., 15:30",
-      "quote": "Beide treffen  1.90"
-    },
-    {
       "teams": "Leverkusen vs. Paderborn",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Beide treffen  1.91"
+    },
+    {
+      "teams": "Frankfurt vs. Hoffenheim",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Beide treffen  1.83"
+    },
+    {
+      "teams": "Union Berlin vs. RB Leipzig",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Über 2,5 Tore  2.10"
     }
   ]
 }
