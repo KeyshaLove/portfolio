@@ -1,11 +1,6 @@
 {
-  "updated": "2026-11-22T20:24:21Z",
+  "updated": "2026-11-23T13:15:46Z",
   "items": [
-    {
-      "teams": "Werder Bremen vs. HSV",
-      "match": "Bundesliga · So., 17:30",
-      "quote": "Sieg SVW  1.73"
-    },
     {
       "teams": "Werder Bremen vs. Gladbach",
       "match": "Bundesliga · Fr., 20:30",
@@ -20,6 +15,11 @@
       "teams": "HSV vs. FC Bayern",
       "match": "Bundesliga · Sa., 15:30",
       "quote": "Sieg HSV  2.24"
+    },
+    {
+      "teams": "1. FC Koeln vs. Elversberg",
+      "match": "Bundesliga · Sa., 15:30",
+      "quote": "Über 2,5 Tore  1.82"
     }
   ]
 }
